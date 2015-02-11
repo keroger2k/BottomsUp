@@ -23,9 +23,15 @@ namespace BottomsUp.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                     "~/Scripts/slidebars.js",
+                     "~/Scripts/holder.min.js",
+                     "~/Scripts/custom.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/slidebars.css",
+                      "~/Content/styles.css"));
         }
     }
 }

@@ -1,4 +1,4 @@
-$(function () {
+;(function ($) {
 
     var mySlidebars = new $.slidebars();
     $('.my-button').on('click', function () {
@@ -22,4 +22,4 @@ $(function () {
     });
 
 
-});
+})(jQuery);
