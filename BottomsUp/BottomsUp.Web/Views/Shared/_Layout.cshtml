@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bottoms Up: @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/styles")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -21,7 +22,7 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <img src="holder.js/20x20" class="img-circle my-button"
-                         style="float:left;margin-right:5px;">Bottoms Up BOE
+                         style="float:left;margin-right:5px;">Bottoms Up
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -54,6 +55,7 @@
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
 

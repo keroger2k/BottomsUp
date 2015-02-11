@@ -1,0 +1,109 @@
+﻿body {
+    padding-top: 40px;
+    background: #ececec;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+nav.navbar {
+    background-color: #4285f4;
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.sb-slidebar {
+    background-color: #fff;
+    border-right: gray;
+    box-shadow: 2px 2px 2px #B6AFAF;
+    padding: 20px 20px;
+
+    &.sb-active {
+        padding-top:50px;
+    }
+}
+
+
+
+.container {
+    padding-left: 50px;
+    background-color: #ddd;
+    padding-bottom: 50px;
+}
+
+.sidebar.action-items {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    padding: 0px 0px 10px 22px;
+    color: #999;
+}
+
+/********************
+*   PWS Task List
+********************/
+
+ul.pws-tasks {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+
+    > li.pws-task-item {
+        background-color: #fff;
+        padding: 12px 24px;
+        box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+        overflow: hidden;
+        cursor: pointer;
+
+        .pws-description {
+            float: left;
+        }
+
+        .pws-number {
+            width: 150px;
+            float: left;
+        }
+
+        .pws-total-monthly-hours {
+            float: right;
+        }
+    }
+
+    .pws-task-labor-breakdown {
+        background-color: #e9e9e9;
+        box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+        clear: both;
+        display: none;
+        list-style: none;
+        padding: 10px 0px 10px 10px;
+        margin-top: 40px;
+
+        .pws-task-labor-item {
+            clear: left;
+            margin-bottom: 5px;
+        }
+
+        .pws-lc-item {
+            float: left;
+            padding: 0px 0px 3px 11px;
+
+            &:hover {
+                background-color: #d5d5d5;
+                border-radius: 360px;
+            }
+
+            > span {
+                margin-right: 10px;
+                padding-top: 7px;
+            }
+        }
+    }
+}

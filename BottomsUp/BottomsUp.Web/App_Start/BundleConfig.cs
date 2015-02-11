@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using BundleTransformer.Core.Transformers;
+using System.Web;
 using System.Web.Optimization;
 
 namespace BottomsUp.Web
@@ -30,8 +31,18 @@ namespace BottomsUp.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/slidebars.css",
-                      "~/Content/styles.css"));
+                      "~/Content/slidebars.css"));
+
+            var sassBundle = new Bundle("~/bundles/styles").Include(
+                "~/Content/bottomsup.scss");
+
+
+            sassBundle.Transforms.Add(new StyleTransformer());
+            sassBundle.Transforms.Add(new CssMinify());
+            sassBundle.Orderer = new BundleTransformer.Core.Orderers.NullOrderer();
+            bundles.Add(sassBundle);
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }
