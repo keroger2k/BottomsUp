@@ -56,3 +56,11 @@ C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\IronRu
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Microsoft.Dynamic.dll
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Microsoft.Scripting.dll
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\ru-ru\BundleTransformer.Core.resources.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\BundleTransformer.Core.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\BundleTransformer.SassAndScss.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\IronRuby.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\IronRuby.Libraries.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Microsoft.Dynamic.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Microsoft.Scripting.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\ru-ru\BundleTransformer.Core.resources.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\obj\Release\BottomsUp.Web.csprojResolveAssemblyReference.cache

@@ -1,0 +1,15 @@
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\BottomsUp.Core.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\BottomsUp.Core.pdb
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.csprojResolveAssemblyReference.cache
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.pdb
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\BottomsUp.Core.dll.config
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\Newtonsoft.Json.xml

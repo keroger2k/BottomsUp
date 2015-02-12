@@ -1,0 +1,12 @@
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.exe.config
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.exe
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.pdb
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Core.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Core.pdb
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.csprojResolveAssemblyReference.cache
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.exe
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.pdb
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.xml
