@@ -5,7 +5,7 @@
 <div class="container">
     <h2>@Model.Name</h2>
     <ul class="pws-tasks">
-        @foreach(var req in Model.Requirements) 
+        @foreach (var req in Model.Requirements)
         {
             <li data-id="@req.Id" class="pws-task-item">
                 <div class="pws-number">@req.PWSNumber</div>
@@ -14,91 +14,73 @@
                 </div>
                 <div class="pws-total-monthly-hours">
                     <div class="hover-menu"></div>
-                    <span>30</span> hrs
+                    <span>@req.TotalHours</span> hrs
                 </div>
                 <ul class="pws-task-labor-breakdown">
+                    @foreach (var task in req.Tasks)
+                    {
+                        <li class="pws-task-labor-item">
+                            <div class="pws-lc-item"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option selected>Software Engineer 2</option>
+                                        <option>Software Engineer 4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group percentage-group">
+                                    <label class="sr-only" for="percentageInput">Labor Percentage</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="percentageInput" value="@task.Perecentage"
+                                               placeholder="Labor %">
+                                        <div class="input-group-addon">%</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="descriptionInput">Widget</label>
+                                    <input type="text" class="form-control" id="descriptionInput" value="@task.Description"
+                                           placeholder="Description of Widget">
+                                </div>
+                                <div class="form-group volume-group">
+                                    <label class="sr-only" for="volumeInput">Volume</label>
+                                    <input type="text" class="form-control" id="volumeInput" placeholder="Volume" value="@task.Volume">
+                                </div>
+                                <div class="form-group volume-group">
+                                    <label class="sr-only" for="numberInput">Number</label>
+                                    <input type="text" class="form-control" id="numberInput" placeholder="Number" value="@task.Number">
+                                </div>
+                            </form>
+                        </li>
+                    }
                     <li class="pws-task-labor-item">
-                        <div class="pws-lc-item"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                        <div class="pws-lc-item"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <form class="form-inline">
                             <div class="form-group">
                                 <select class="form-control">
-                                    <option selected>Software Engineer 2</option>
-                                    <option>Software Engineer 4</option>
-                                </select>
-                            </div>
-                            <div class="form-group percentage-group">
-                                <label class="sr-only" for="exampleInputAmount">Labor Percentage</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="exampleInputAmount" value="80"
-                                           placeholder="Labor %">
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputPassword3">Widget</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3"
-                                       placeholder="Description of Widget">
-                            </div>
-                            <div class="form-group volume-group">
-                                <label class="sr-only" for="exampleInputPassword3">Volume</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Volume">
-                            </div>
-                        </form>
-                    </li>
-                    <li class="pws-task-labor-item">
-                        <div class="pws-lc-item"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option>Software Engineer 2</option>
-                                    <option selected>Software Engineer 4</option>
-                                </select>
-                            </div>
-                            <div class="form-group percentage-group">
-                                <label class="sr-only" for="exampleInputAmount">Labor Percentage</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="exampleInputAmount" value="20"
-                                           placeholder="Labor %">
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputPassword3">Widget</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3"
-                                       placeholder="Description of Widget">
-                            </div>
-                            <div class="form-group volume-group">
-                                <label class="sr-only" for="exampleInputPassword3">Volume</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Volume">
-                            </div>
-                        </form>
-                    </li>
-                    <li class="pws-task-labor-item">
-                        <form class="form-inline">
-                            <div class="pws-lc-item"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
-                            <div class="form-group">
-                                <select class="form-control" required>
-                                    <option selected></option>
+                                    <option></option>
                                     <option>Software Engineer 2</option>
                                     <option>Software Engineer 4</option>
                                 </select>
                             </div>
                             <div class="form-group percentage-group">
-                                <label class="sr-only" for="exampleInputAmount">Labor Percentage</label>
+                                <label class="sr-only" for="percentageInput">Labor Percentage</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="exampleInputAmount" value=""
-                                           placeholder="Labor %" required>
+                                    <input type="text" class="form-control" id="percentageInput">
                                     <div class="input-group-addon">%</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="sr-only" for="exampleInputPassword3">Widget</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3"
-                                       placeholder="Description of Widget" required>
+                                <label class="sr-only" for="descriptionInput">Widget</label>
+                                <input type="text" class="form-control" id="descriptionInput"
+                                       placeholder="Description of Widget">
                             </div>
                             <div class="form-group volume-group">
-                                <label class="sr-only" for="exampleInputPassword3">Volume</label>
-                                <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Volume" required>
+                                <label class="sr-only" for="volumeInput">Volume</label>
+                                <input type="text" class="form-control" id="volumeInput" placeholder="Volume">
+                            </div>
+                            <div class="form-group volume-group">
+                                <label class="sr-only" for="numberInput">Number</label>
+                                <input type="text" class="form-control" id="numberInput" placeholder="Number">
                             </div>
                         </form>
                     </li>

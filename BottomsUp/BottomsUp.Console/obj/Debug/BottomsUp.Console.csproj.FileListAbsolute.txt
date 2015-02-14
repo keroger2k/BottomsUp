@@ -10,3 +10,15 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\E
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.exe.config
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.exe
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Console.pdb
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Core.dll
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.dll
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\BottomsUp.Core.pdb
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.xml
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.csprojResolveAssemblyReference.cache
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.exe
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.pdb
