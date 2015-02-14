@@ -1,16 +1,16 @@
-﻿@{
+﻿@model BottomsUp.Core.Models.Proposal
+@{
     ViewBag.Title = "Home";
 }
 <div class="container">
-    <h2>LA - AFB 61 CS Recompete</h2>
+    <h2>@Model.Name</h2>
     <ul class="pws-tasks">
-        @for (var i = 0; i < 10; i++)
+        @foreach(var req in Model.Requirements) 
         {
-            <li data-id="@i.ToString()" class="pws-task-item">
-                <div class="pws-number">1.3.2.1.b</div>
+            <li data-id="@req.Id" class="pws-task-item">
+                <div class="pws-number">@req.PWSNumber</div>
                 <div class="pws-description">
-                    The contractor shall analyze problems reported via Tier I and take corrective
-                    actions to restore GFM functionality.
+                    @req.Description
                 </div>
                 <div class="pws-total-monthly-hours">
                     <div class="hover-menu"></div>
