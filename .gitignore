@@ -1,43 +1,21 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+#
+# Offroadcode's Mercurial Ignore file
+# visit /blog/2012/4/5/mercurial-ignore-file-for-umbraco/ for updates/additions
+# Thanks!
+#
+##### File globs to match ####
+syntax: glob
+# Data folders/files
+*/ExamineIndexes/*
+www/App_Data/umbraco.config
+*/App_Browsers/*
+*/App_Data/TEMP/*
+*/_systemUmbracoIndexDontDelete/*
 
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Dll's and related C# crud
+*/bin/Debug/*
+*/obj/Debug/*
+*/obj/*
+*.pdb
+*.user
+*.DS_Store
