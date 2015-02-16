@@ -17,6 +17,10 @@ namespace BottomsUp.Core.Models
         public string Description { get; set; }
         public string PWSNumber { get; set; }
         public string Comments { get; set; }
+        public bool Deleted { get; set; }
+        public DateTime Updated { get; set; }
+        public DateTime Created { get; set; }
+        public string ModifiedBy { get; set; }
 
         public virtual Requirement References { get; set; }
         public virtual ICollection<Tasking> Tasks { get; set; }

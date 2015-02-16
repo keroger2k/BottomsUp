@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BottomsUp.Core.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,18 +7,21 @@ using System.Web.Mvc;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class HomeController : Controller
+    public class ProposalsController : DataController
     {
-        // GET: Home
         public ActionResult Index()
         {
-            return View();
+            var proposal = _context.Propsals.ToList();
+            return View(proposal);
         }
 
         // GET: Home/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var proposal = _context.Propsals.FirstOrDefault(c => c.Id == id);
+            if (proposal == null)
+                return new HttpNotFoundResult();
+            return View(proposal);
         }
 
         // GET: Home/Create

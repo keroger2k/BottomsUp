@@ -14,6 +14,12 @@ namespace BottomsUp.Core.Models
         public decimal Volume { get; set; }
         public decimal Number { get; set; }
         public string Comments { get; set; }
+
+        public bool Deleted { get; set; }
+        public DateTime Updated { get; set; }
+        public DateTime Created { get; set; }
+        public string ModifiedBy { get; set; }
+        
         public virtual LaborCategory Labor { get; set; }
     }
 }
