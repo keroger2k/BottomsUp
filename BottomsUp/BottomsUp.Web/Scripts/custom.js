@@ -29,13 +29,21 @@ $.validator.setDefaults({
     $(".pws-task-item").on('click', function () {
 
         var $self = $(this);
-        var $taskList = $self.find(".pws-task-labor-breakdown");
 
-        if ($taskList.is(":hidden")) {
-            $taskList.slideDown(250);
-        } else {
-            $taskList.hide(250);
-        }
+        $.getJSON('/Proposals/GetRequirementTasks', { id: $self.data('id') }, function (data) {
+            var $table = $('#task-table tbody');
+            console.log(data);
+
+            $table.empty();
+
+
+            var template = $('#mustache-template').html();
+            console.log(r);
+            var r = Mustache.render(template, {
+                rows: data
+            });
+            $table.append(r);
+        });
     });
 
     $(".pws-task-labor-breakdown").on('click', function (e) {

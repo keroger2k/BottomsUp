@@ -17,5 +17,7 @@ namespace BottomsUp.Core.Data
         }
 
         public DbSet<Proposal> Propsals { get; set; }
+        public DbSet<Requirement> Requirements { get; set; }
+
     }
 }

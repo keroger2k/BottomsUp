@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+@using StackExchange.Profiling;
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -54,11 +55,21 @@
 
     @RenderBody()
 
+    <div class="sb-slidebar sb-left sb-static">
+        <h3>Actions Items</h3>
+        <ul class="sidebar action-items">
+            <li><a href="">Add New Task</a></li>
+        </ul>
+        <h3>Status</h3>
+        <h3>Another Setting</h3>
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/site")
 
     @RenderSection("scripts", required: false)
+    @MiniProfiler.RenderIncludes()
 </body>
 </html>

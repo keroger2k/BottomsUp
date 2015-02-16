@@ -33,7 +33,7 @@ nav.navbar {
 .container {
     padding-left: 50px;
     background-color: #ddd;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
 }
 
 .sidebar.action-items {
@@ -55,13 +55,16 @@ ul.pws-tasks {
     list-style: none;
     margin: 0px;
     padding: 0px;
+    max-height: 400px;
+    overflow: auto;
 
     > li.pws-task-item {
         background-color: #fff;
         padding: 12px 24px;
         box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
-        overflow: hidden;
         cursor: pointer;
+        border: 1px solid transparent;
+        overflow: hidden;
 
         .pws-description {
             float: left;
@@ -75,9 +78,12 @@ ul.pws-tasks {
         .pws-total-monthly-hours {
             float: right;
         }
-    }
 
-    .pws-task-labor-breakdown {
+        &:hover {
+            border-left: 1px solid green;
+        }
+    }
+    /*.pws-task-labor-breakdown {
         background-color: #e9e9e9;
         box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
         clear: both;
@@ -115,5 +121,55 @@ ul.pws-tasks {
                 padding-top: 7px;
             }
         }
+    }*/
+}
+
+
+
+/********************
+*   Proposal Details
+********************/
+.prop-info-container {
+    h2 {
+        span {
+            font-size: .6em;
+            color: rgba(0,0,0,.12);
+        }
+    }
+
+    .proposal-information {
+        min-height: 300px;
+        background-color: #fff;
+
+        .row {
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+
+        table {
+            tbody {
+                tr {
+                    cursor: pointer;
+                }
+            }
+
+            tfoot {
+                tr {
+                    td {
+                        border-top: 1px solid rgb(166, 166, 166);
+                    }
+                }
+
+                font-size: .8em;
+                background-color: #c4c7cb;
+                color: rgb(107, 107, 107);
+            }
+        }
+    }
+
+
+    nav.navbar {
+        border-radius: 0px;
+        min-height: 10px;
     }
 }
