@@ -1,111 +1,142 @@
-﻿using BottomsUp.Core.Data;
-using BottomsUp.Core.Models;
-using BottomsUp.Core.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using BottomsUp.Core.Data;
+using BottomsUp.Core.Models;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class ProposalsController : DataController
+    public class ProposalsController : ApiController
     {
-        private readonly IProposalService _propService;
-        public ProposalsController(IProposalService propService)
+        private DatabaseContext db = new DatabaseContext();
+
+        // GET: api/Proposals
+        public IQueryable<Proposal> GetPropsals()
         {
-            this._propService = propService;
+            return db.Propsals;
         }
 
-        public ActionResult Index()
+        // GET: api/Proposals/5
+        [ResponseType(typeof(Proposal))]
+        public async Task<IHttpActionResult> GetProposal(int id)
         {
-            var proposal = _context.Propsals.Where(c => !c.Deleted).ToList();
-            return View(proposal);
-        }
-
-        // GET: Proposal/Details/5
-        public ActionResult Details(int id)
-        {
-            var item = _propService.GetProposal(id);
-            if (item == null)
-                return new HttpNotFoundResult();
-            return View(item);
-        }
-
-        [HttpGet]
-        public ActionResult GetRequirementTasks(int id)
-        {
-            var item = _propService.GetRequirementTask(id);
-            return Json(item, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Proposal/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Proposal/Create
-        [HttpPost]
-        public ActionResult Create(Proposal proposal)
-        {
-            if (ModelState.IsValid)
+            Proposal proposal = await db.Propsals.FindAsync(id);
+            if (proposal == null)
             {
-                proposal.Created = DateTime.Now;
-                proposal.Updated = DateTime.Now;
-                proposal.ModifiedBy = string.IsNullOrEmpty(HttpContext.User.Identity.Name) ? "Unknown" : HttpContext.User.Identity.Name;
-                _context.Propsals.Add(proposal);
-                return RedirectToAction("Index");
+                return NotFound();
             }
-            return View(proposal);
+
+            return Ok(proposal);
         }
 
-        // GET: Proposal/Edit/5
-        public ActionResult Edit(int id)
+        // GET: api/Proposals/5
+        [ResponseType(typeof(Proposal))]
+        [Route("api/proposals/{id}/requirements")]
+        public async Task<IHttpActionResult> GetProposalRequirements(int id)
         {
-            var item = _context.Propsals.FirstOrDefault(c => c.Id == id);
-            if (item == null)
-                return new HttpNotFoundResult();
-            return View(item);
-        }
-
-        // POST: Proposal/Edit/5
-        [HttpPost]
-        public ActionResult Edit(Proposal proposal)
-        {
-            if (ModelState.IsValid)
+            Proposal proposal = await db.Propsals
+                .Include("Requirements")
+                .Include("Requirements.Category")
+                .Include("Requirements.Tasks")
+                .Include("Requirements.Tasks.Labor")
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (proposal == null)
             {
-                var item = _context.Propsals.FirstOrDefault(c => c.Id == proposal.Id);
-                if (item == null)
-                    return new HttpNotFoundResult();
-                item.Updated = DateTime.Now;
-                item.ModifiedBy = string.IsNullOrEmpty(HttpContext.User.Identity.Name) ? "Unknown" : HttpContext.User.Identity.Name;
-                UpdateModel<Proposal>(item);
-                return RedirectToAction("Index");
+                return NotFound();
             }
-            return View(proposal);
+
+            return Ok(proposal);
         }
 
-        // GET: Proposal/Delete/5
-        public ActionResult Delete(int id)
+        // PUT: api/Proposals/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutProposal(int id, Proposal proposal)
         {
-            var item = _context.Propsals.FirstOrDefault(c => c.Id == id);
-            if (item == null)
-                return new HttpNotFoundResult();
-            return View(item);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != proposal.Id)
+            {
+                return BadRequest();
+            }
+            proposal.ModifiedBy = "UNKNOWN";
+            proposal.Updated = DateTime.Now;
+            db.Entry(proposal).State = EntityState.Modified;
+
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProposalExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: Proposal/Delete/5
-        [HttpPost]
-        public ActionResult Delete(Proposal proposal)
+        // POST: api/Proposals
+        [ResponseType(typeof(Proposal))]
+        public async Task<IHttpActionResult> PostProposal(Proposal proposal)
         {
-            var item = _context.Propsals.FirstOrDefault(c => c.Id == proposal.Id);
-            if (item == null)
-                return new HttpNotFoundResult();
-            item.Updated = DateTime.Now;
-            item.ModifiedBy = string.IsNullOrEmpty(HttpContext.User.Identity.Name) ? "Unknown" : HttpContext.User.Identity.Name;
-            item.Deleted = true;
-            return RedirectToAction("Index");
+            proposal.ModifiedBy = "UNKNOWN";
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Propsals.Add(proposal);
+            await db.SaveChangesAsync();
+
+            return CreatedAtRoute("DefaultApi", new { id = proposal.Id }, proposal);
+        }
+
+        // DELETE: api/Proposals/5
+        [ResponseType(typeof(Proposal))]
+        public async Task<IHttpActionResult> DeleteProposal(int id)
+        {
+            Proposal proposal = await db.Propsals.FindAsync(id);
+            if (proposal == null)
+            {
+                return NotFound();
+            }
+
+            db.Propsals.Remove(proposal);
+            await db.SaveChangesAsync();
+
+            return Ok(proposal);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool ProposalExists(int id)
+        {
+            return db.Propsals.Count(e => e.Id == id) > 0;
         }
     }
 }

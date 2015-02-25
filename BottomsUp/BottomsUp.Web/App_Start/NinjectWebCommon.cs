@@ -45,8 +45,7 @@ namespace BottomsUp.Web.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-                kernel.Bind<IProposalService>().To<ProposalService>();
-
+                
                 RegisterServices(kernel);
                 return kernel;
             }
@@ -63,6 +62,7 @@ namespace BottomsUp.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IProposalService>().To<ProposalService>();
         }        
     }
 }

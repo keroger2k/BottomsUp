@@ -22,6 +22,3 @@ C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\De
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.csprojResolveAssemblyReference.cache
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.exe
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\obj\Debug\BottomsUp.Console.pdb
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\AutoMapper.dll
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\AutoMapper.pdb
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Console\bin\Debug\AutoMapper.xml

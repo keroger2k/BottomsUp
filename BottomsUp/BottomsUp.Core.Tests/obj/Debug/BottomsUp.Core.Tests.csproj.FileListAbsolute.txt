@@ -28,6 +28,3 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debu
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\obj\Debug\BottomsUp.Core.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\obj\Debug\BottomsUp.Core.Tests.dll
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\obj\Debug\BottomsUp.Core.Tests.pdb
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\AutoMapper.dll
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\AutoMapper.pdb
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\AutoMapper.xml

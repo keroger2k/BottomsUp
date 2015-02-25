@@ -27,8 +27,10 @@ namespace BottomsUp.Web
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                      "~/Scripts/slidebars.js",
                      "~/Scripts/holder.min.js",
-                     "~/Scripts/mustache.js",
+                     //"~/Scripts/mustache.js",
+                     "~/Scripts/handlebars.js",
                      "~/Scripts/moment.js",
+                     "~/Scripts/BottomsUp.Data.js",
                      "~/Scripts/custom.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

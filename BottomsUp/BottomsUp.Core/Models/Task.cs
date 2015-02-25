@@ -9,17 +9,18 @@ namespace BottomsUp.Core.Models
     public class Tasking
     {
         public int Id { get; set; }
+        public int RequirementId { get; set; }
+        public int LaborId { get; set; }
         public string Description { get; set; }
-        public decimal Perecentage { get; set; }
+        public decimal Percentage { get; set; }
         public decimal Volume { get; set; }
         public decimal Number { get; set; }
         public string Comments { get; set; }
 
-        public bool Deleted { get; set; }
         public DateTime Updated { get; set; }
         public DateTime Created { get; set; }
         public string ModifiedBy { get; set; }
         
-        public virtual LaborCategory Labor { get; set; }
+        public LaborCategory Labor { get; set; }
     }
 }

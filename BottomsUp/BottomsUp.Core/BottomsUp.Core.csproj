@@ -68,9 +68,7 @@
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DTOs\ProposalDTO.cs" />
-    <Compile Include="Models\DTOs\RequirementDTO.cs" />
-    <Compile Include="Models\DTOs\TaskDTO.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\LaborCategory.cs" />
     <Compile Include="Models\Requirement.cs" />
     <Compile Include="Models\Task.cs" />

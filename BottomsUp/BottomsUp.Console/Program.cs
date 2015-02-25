@@ -16,7 +16,7 @@ namespace BottomsUp.Console
         {
 
             var db = new DatabaseContext();
-            var prop = new Proposal { Name = "LA - AFB 61 CS Recompete" };
+            var prop = new Proposal { Name = "LA - AFB 61 CS Recompete", Created= DateTime.Now, ModifiedBy = "System", Updated = DateTime.Now };
             
 
             using (TextFieldParser parser = new TextFieldParser(@"c:\pws-shred.csv"))
@@ -29,7 +29,13 @@ namespace BottomsUp.Console
                 {
                     string[] fields = parser.ReadFields();
 
-                    prop.Requirements.Add(new Requirement { PWSNumber = fields.ElementAt(0), Description = fields.ElementAt(1) });
+                    prop.Requirements.Add(new Requirement { 
+                        PWSNumber = fields.ElementAt(0), 
+                        Description = fields.ElementAt(1),
+                        Updated = DateTime.Now,
+                        Created = DateTime.Now,
+                        ModifiedBy = "System"
+                    });
                 }
             }
 

@@ -18,7 +18,7 @@ namespace BottomsUp.Core.Tests.Models
             {
                 Tasks = new List<Tasking>()
                 {
-                   new Tasking { Number = 1, Perecentage = 100, Volume = 1 }
+                   new Tasking { Number = 1, Percentage = 100, Volume = 1 }
                 }
             };
 
@@ -35,8 +35,8 @@ namespace BottomsUp.Core.Tests.Models
             {
                 Tasks = new List<Tasking>()
                 {
-                   new Tasking { Number = 1, Perecentage = 100, Volume = 1 },
-                   new Tasking { Number = 1, Perecentage = 50, Volume = 1 }
+                   new Tasking { Number = 1, Percentage = 100, Volume = 1 },
+                   new Tasking { Number = 1, Percentage = 50, Volume = 1 }
                 }
             };
 

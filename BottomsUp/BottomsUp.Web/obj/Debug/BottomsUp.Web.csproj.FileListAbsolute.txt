@@ -146,3 +146,5 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.Common.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.Mvc.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.WebApi.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.WebApi.WebHost.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.WebApi.WebHost.xml

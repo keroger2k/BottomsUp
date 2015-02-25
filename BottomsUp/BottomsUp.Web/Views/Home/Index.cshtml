@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Home/Index</h2>
+    <button id="createProposal" class="btn btn-primary">Create</button>
+    <div id="proposalOutput"></div>
+    <div id="proposalEditOutput"></div>
+</div>
+
+
+<script id="proposalTable" type="text/html">
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Updated</th>
+            <th>Created</th>
+            <th>Modified By</th>
+            <th></th>
+        </tr>
+        {{#each proposal }}
+        <tr data-id="{{Id}}">
+            <td>{{Name}}</td>
+            <td>{{Updated}}</td>
+            <td>{{Created}}</td>
+            <td>{{ModifiedBy}}</td>
+            <td>
+                <a href="/home/details/{{Id}}" class="btn btn-default">Details</a>
+                <button class="editProposal btn btn-primary">Edit</button>
+                <button class="deleteProposal btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+</script>
+
+<script id="proposalEdit" type="text/html">
+    <hr />
+    <form>
+        <input hidden name="id" id="id" value="{{Id}}" />
+        <input hidden name="created" id="created" value="{{Created}}" />
+        <input hidden name="updated" id="updated" value="{{Updated}}" />
+        <label for="name">Name</label>
+        <input type="text" name="Name" id="name" required value="{{Name}}" />
+        <input type="submit" class="btn btn-primary" id="saveProposal" />
+        <button id="cancelProposalModification" class="btn btn-default">Cancel</button>
+    </form>
+</script>
+
+
+@section scripts {
+    <script type="text/javascript">
+        (function () {
+
+            var templates = {};
+
+            var compileTemplates = function () {
+                templates.proposalTable = Handlebars.compile($("#proposalTable").html());
+                templates.proposalEdit = Handlebars.compile($("#proposalEdit").html());
+            };
+
+            var showAllProposals = function (data) {
+                var output = templates.proposalTable({ proposal: data });
+                $('#proposalOutput').html(output);
+            };
+
+            var showProposalForEdit = function (proposal) {
+                var output = templates.proposalEdit(proposal);
+                $('#proposalEditOutput').html(output);
+            };
+
+            var refreshProposals = function () {
+                BottomsUp.Data.getProposals().done(showAllProposals);
+            };
+
+            var editProposal = function () {
+                var id = getId(this);
+                BottomsUp.Data.getProposal(id).done(showProposalForEdit);
+            };
+
+            var deleteProposal = function () {
+                var id = getId(this);
+                BottomsUp.Data.deleteProposal(id).done(refreshProposals);
+            };
+
+            var createProposal = function () {
+                var newDate = new Date();
+                var video = {
+                    Id: 0,
+                    Name: "",
+                    Created: newDate.today() + "T" + newDate.timeNow(),
+                    Updated: newDate.today() + "T" + newDate.timeNow()
+                };
+                showProposalForEdit(video);
+            };
+
+            var clearEdit = function () {
+                $('#proposalEditOutput').empty();
+            };
+
+            var saveProposal = function () {
+
+                var proposal = {
+                    'Id': $('#id').val(),
+                    'Name': $('#name').val(),
+                    'Created': $('#created').val(),
+                    'Updated': $('#updated').val()
+                };
+
+                var operation;
+                if (proposal.Id != "0") {
+                    operation = BottomsUp.Data.updateProposal(proposal);
+                } else {
+                    operation = BottomsUp.Data.addProposal(proposal);
+                }
+                operation.done(refreshProposals, clearEdit);
+                return false;
+            };
+
+
+            var wireEvents = function () {
+                $(document).on('click', '.editProposal', editProposal);
+                $(document).on('click', '#saveProposal', saveProposal);
+                $(document).on('click', '#createProposal', createProposal);
+                $(document).on('click', '.deleteProposal', deleteProposal);
+                $(document).on('click', '#cancelProposalModification', clearEdit);
+            };
+
+            var getId = function (element) {
+                return $(element).parents('tr').data('id');
+            };
+
+            $(function () {
+                wireEvents();
+                compileTemplates();
+                refreshProposals();
+            });
+
+        }());
+    </script>
+}
