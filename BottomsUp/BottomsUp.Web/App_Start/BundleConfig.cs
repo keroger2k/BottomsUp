@@ -25,6 +25,7 @@ namespace BottomsUp.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                     "~/Scripts/angular.js",
                      "~/Scripts/slidebars.js",
                      "~/Scripts/holder.min.js",
                      //"~/Scripts/mustache.js",

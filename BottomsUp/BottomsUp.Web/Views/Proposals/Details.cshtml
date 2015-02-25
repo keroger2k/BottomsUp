@@ -1,107 +1,130 @@
-﻿@model BottomsUp.Core.Models.DTOs.ProposalDTO
-
+﻿@model BottomsUp.Core.Models.Proposal
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container prop-info-container">
-    <h2>@Model.Name - Details <span>(Id: @Model.Id)</span></h2>
-    <div class="proposal-information">
-        <div class="row task-header">
-            <div class="col-xs-12">
-                <button class="btn btn-default" id="add-new-task" disabled="disabled">
-                    Add New Task
-                </button>
-            </div>
-        </div>
-        <div class="row">
-            <ul id="requirement-task-list"></ul>
+<style type="text/css">
+    #requirements-table {
+        cursor: pointer;
+    }
 
-        </div>
-        
-    </div>
+    tr.requirement:hover td {
+        background-color: #ebf8f0;
+    }
+
+    tr.requirement.edit td {
+        background-color: #666 !important;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2) !important;
+    }
+</style>
+<div class="container">
+    <input type="hidden" name="proposalId" id="proposalId" value="@Model.Id" />
+    <div id="proposalDetailsOutput"></div>
 </div>
+<script id="proposalDetails" type="text/html">
 
+    <h2>{{Name}} <span>({{Id}})</span></h2>
 
-<div class="container prop">
-    <h2>PWS Requirements</h2>
-    <ul class="pws-tasks">
-        @foreach (var req in Model.Requirements)
-        {
-            <li data-id="@req.Id" class="pws-task-item">
-                <div class="row">
-                    <div class="col-xs-1">
-                        <div class="pws-number">@req.PWSNumber</div>
-                    </div>
-                    <div class="col-xs-10">
-                        <div class="pws-description">
-                            @req.Description
-                        </div>
-                    </div>
-                    <div class="col-xs-1">
-                        <div class="pws-total-monthly-hours">
-                            <span>@string.Format("{0:N2}", req.TotalHours)</span> hrs
-                        </div>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
-</div>
-
-
-<script id="mustache-template" type="text/template">
-    {{#rows}}
-    <li>
-        <form>
-            <div class="row">
-                <input type="hidden" name="Task.RequirementId" value="{{RequirementId}}" />
-                <input type="hidden" name="Task.Id" value="{{Id}}"/>
-                <div class="col-xs-1">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    <button type="submit" class="btn">
-                        <span class="glyphicon glyphicon-floppy-save"></span>
-                    </button>
-                </div>
-                <div class="col-xs-4 form-group">
-                    <label for="description">Description</label>
-                    @*<input type="text" class="form-control" name="Task.Description" value="{{Description}}" required />*@
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                            Dropdown
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label for="number">Number</label>
-                    <input type="number" class="form-control" name="Task.Number" value="{{Number}}" required />
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label for="volume">Volume</label>
-                    <input type="text" class="form-control" name="Task.Volume" value="{{Volume}}" required />
-                </div>
-                <div class="col-xs-2 form-group">
-                    <label for="Task.Percentage">Percentage</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="Task.Percentage" value="{{Percentage}}" required />
-                        <div class="input-group-addon">%</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row second-row">
-                <div class="col-xs-5 col-xs-offset-1 form-group">
-                    <label for="Task.Comments">Comments</label>
-                    <textarea cols="20" class="form-control" name="Task.Comments" rows="3">{{Comments}}</textarea>
-                </div>
-            </div>
-        </form>
-    </li>
-    {{/rows}}
+    <table id="requirements-table" class="table table-bordered table-hover table-condensed table-striped">
+        <thead>
+            <tr>
+                <th style="width:200px;">PWS Number</th>
+                <th style="width:200px;">Category</th>
+                <th style="width:200px;">Description</th>
+                <th style="width:200px;">Comments</th>
+            </tr>
+        </thead>
+        {{#each Requirements }}
+        <tr data-id="{{Id}}" data-proposalid="{{ProposalId}}" class="requirement">
+            <td>{{PWSNumber}}</td>
+            <td>{{Category.Name}}</td>
+            <td>{{Description}}</td>
+            <td>{{Comments}}</td>
+        </tr>
+        {{/each}}
+    </table>
 </script>
+
+<script id="requirementsEditRow" type="text/html">
+    <tr data-id="{{Id}}" data-proposalid="{{ProposalId}}" class="requirement edit">
+        <td><input class="form-control" type="text" value="{{PWSNumber}}" /></td>
+        <td><input class="form-control" type="text" value="{{Category.Name}}" /></td>
+        <td><input class="form-control" type="text" value="{{Description}}" /></td>
+        <td><input class="form-control" type="text" value="{{Comments}}" /></td>
+    </tr>
+</script>
+<script id="requirementsDisplayRow" type="text/html">
+    <tr data-id="{{Id}}" data-proposalid="{{ProposalId}}" class="requirement">
+        <td>{{PWSNumber}}</td>
+        <td>{{Category.Name}}</td>
+        <td>{{Description}}</td>
+        <td>{{Comments}}</td>
+    </tr>
+</script>
+
+@section scripts {
+    <script type="text/javascript">
+        (function () {
+
+            var templates = {};
+            var $currentRow;
+
+            var compileTemplates = function () {
+                templates.proposalTable = Handlebars.compile($("#proposalDetails").html());
+                templates.requirementsDisplayRow = Handlebars.compile($("#requirementsDisplayRow").html());
+                templates.requirementsEditRow = Handlebars.compile($("#requirementsEditRow").html());
+            };
+
+            var showProposalsRequirements = function (data) {
+                var output = templates.proposalTable(data);
+                $('#proposalDetailsOutput').html(output);
+            };
+
+            var refreshProposalDetails = function (id) {
+                BottomsUp.Data.getProposalRequirements(id).done(showProposalsRequirements);
+            };
+
+            var clearEdit = function () {
+                $('#proposalEditOutput').empty();
+            };
+
+            var editRequirement = function () {
+
+                var $self = $(this);
+
+                if ($currentRow && $currentRow.data('id') !== $self.data('id')) {
+                    BottomsUp.Data.getRequirement($currentRow.data('id')).done(function (data) {
+                        var output1 = templates.requirementsDisplayRow(data);
+                        $(output1).replaceAll($currentRow);
+
+                        BottomsUp.Data.getRequirement($self.data('id')).done(function (data) {
+                            var output = templates.requirementsEditRow(data);
+                            $currentRow = $(output).replaceAll($self);
+                        });
+                    });
+                } else {
+                    BottomsUp.Data.getRequirement($self.data('id')).done(function (data) {
+                        var output = templates.requirementsEditRow(data);
+                        $currentRow = $(output).replaceAll($self);
+                    });
+                }
+            };
+
+            var wireEvents = function () {
+                $(document).on('click', 'tr.requirement', editRequirement);
+            };
+
+            var getId = function (element) {
+                return $(element).parents('tr').data('id');
+            };
+
+            $(function () {
+                wireEvents();
+                compileTemplates();
+                refreshProposalDetails($('#proposalId').val());
+            });
+
+        }());
+    </script>
+}
+

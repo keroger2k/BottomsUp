@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 @using StackExchange.Profiling;
 <head>
     <meta charset="utf-8" />
@@ -52,6 +52,18 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    <div ng-controller="MainController">
+        <h1>{{message}}</h1>
+        <div>
+            <div>
+                name: {{user.name}}
+            </div>
+            <div>
+                location: {{user.location}}
+            </div>
+            <img ng-src="{{user.avatar_url}}" title="{{user.name}}" />
+        </div>
+    </div>
 
     @RenderBody()
 
@@ -71,5 +83,22 @@
 
     @RenderSection("scripts", required: false)
     @MiniProfiler.RenderIncludes()
+
+    <script type="text/javascript">
+        var myApp = angular.module('myApp', []);
+
+        var MainController = function ($scope, $http) {
+            var onUserComplete = function (response) {
+                $scope.user = response.data;
+            };
+
+            $http.get("https://api.github.com/users/robconery").then(onUserComplete);
+
+            $scope.message = "Hello, Angular!";
+        };
+
+        myApp.controller('MainController', MainController);
+
+    </script>
 </body>
 </html>
