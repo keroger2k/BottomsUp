@@ -13,7 +13,8 @@ namespace BottomsUp.Core.Data
         public DatabaseContext()
             : base("DefaultConnection")
         {
-
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Proposal> Propsals { get; set; }

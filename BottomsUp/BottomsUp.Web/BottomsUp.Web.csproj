@@ -192,7 +192,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ProposalsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +205,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\materialPreloader.css" />
     <Content Include="Content\slidebars.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -215,7 +217,17 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="js\dataService.js" />
+    <Content Include="js\home-index.js" />
+    <Content Include="js\controllers\proposals\newProposalController.js" />
+    <Content Include="js\controllers\proposals\proposalsController.js" />
+    <Content Include="js\router.js" />
+    <Content Include="js\controllers\proposals\singleProposalController.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -237,14 +249,23 @@
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\mustache.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="templates\proposals\newProposalView.html" />
+    <Content Include="templates\proposals\proposalsView.html" />
+    <Content Include="templates\proposals\singleProposalView.html" />
     <Content Include="Views\Proposals.bak\Index.cshtml" />
     <Content Include="Views\Proposals.bak\Details.cshtml" />
     <Content Include="Views\Proposals.bak\Edit.cshtml" />
     <Content Include="Views\Proposals.bak\Create.cshtml" />
     <Content Include="Views\Proposals.bak\Delete.cshtml" />
-    <Content Include="Views\Proposals\Index.cshtml" />
-    <Content Include="Views\Proposals\Details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

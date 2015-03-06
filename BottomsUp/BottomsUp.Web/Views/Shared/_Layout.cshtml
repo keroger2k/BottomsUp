@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="myApp">
+<html ng-app="@ViewBag.InitModule">
 @using StackExchange.Profiling;
 <head>
     <meta charset="utf-8" />
@@ -7,6 +7,7 @@
     <title>Bottoms Up: @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/bundles/styles")
+    @Styles.Render("~/content/toastr")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -21,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/#/">
                     <img data-src="holder.js/20x20" class="img-circle my-button"
                          style="float:left;margin-right:5px;">Bottoms Up
                 </a>
@@ -52,18 +53,6 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div ng-controller="MainController">
-        <h1>{{message}}</h1>
-        <div>
-            <div>
-                name: {{user.name}}
-            </div>
-            <div>
-                location: {{user.location}}
-            </div>
-            <img ng-src="{{user.avatar_url}}" title="{{user.name}}" />
-        </div>
-    </div>
 
     @RenderBody()
 
@@ -79,26 +68,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/site")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/toastr")
+
 
     @RenderSection("scripts", required: false)
     @MiniProfiler.RenderIncludes()
 
-    <script type="text/javascript">
-        var myApp = angular.module('myApp', []);
 
-        var MainController = function ($scope, $http) {
-            var onUserComplete = function (response) {
-                $scope.user = response.data;
-            };
-
-            $http.get("https://api.github.com/users/robconery").then(onUserComplete);
-
-            $scope.message = "Hello, Angular!";
-        };
-
-        myApp.controller('MainController', MainController);
-
-    </script>
 </body>
 </html>

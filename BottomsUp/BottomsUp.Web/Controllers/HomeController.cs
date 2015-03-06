@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class ProposalsController : Controller
+    public class HomeController : Controller
     {
         DatabaseContext db = new DatabaseContext();
         // GET: Home

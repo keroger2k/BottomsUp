@@ -1,0 +1,72 @@
+﻿
+<div class="container">
+    <div class="row">
+        <h1>Proposals</h1>
+        <div crud-grid table='proposal' columns='
+                 [{"name":"Id","class":"col-md-1","autoincrement": "true"},
+                 {"name":"name", "class": "col-md-2"},
+                 {
+                    "name": "Id",
+                    "class": "col-md-1",
+                    "header": "Proposal",
+                    "lookup":
+                    {
+                        "table": "Proposals",
+                        "key": "Id",
+                        "value":"name",
+                        "orderBy": {"field": "name", "asc": "true"}
+                    }
+                 }]' class="col-md-6"></div>
+
+    </div>
+</div>
+
+<!--<div>
+    <div class="progress" data-ng-show="isBusy">
+        <div class="progress-bar progress-bar-striped active"
+             role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+        </div>
+    </div>
+    <h2>Proposals</h2>
+    <div>
+        <a class="btn btn-default" href="#/newproposal" style="margin-bottom: 5px;">New Proposal</a>
+    </div>
+    <table class="table table-hover table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Modified By</th>
+                <th>Updated</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-ng-repeat="i in data.proposals" data-id="{{ i.id }}">
+
+                <td>
+                    <div class="btn-toolbar" ng-show="i.editMode == null || i.editMode == false">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-edit" ng-click="toggleEditMode(i)"></i>
+                            <i class="btn glyphicon glyphicon-trash" ng-click="deletePerson(i)"></i>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar" ng-show="i.editMode == true">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-save" ng-click="updatePerson(i)"></i>
+                            <i class="btn glyphicon glyphicon-remove" ng-click="toggleEditMode(i)"></i>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span ng-show="i.editMode == null || i.editMode == false">{{i.name}}</span>
+                    <input ng-model="i.name" ng-show="i.editMode == true" />
+                </td>
+                <td>{{ i.modifiedBy }}</td>
+                <td>{{ i.updated | date:'medium' }}</td>
+                <td>{{ i.created | date:'medium'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>-->

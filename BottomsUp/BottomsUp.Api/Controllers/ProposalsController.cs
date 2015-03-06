@@ -97,6 +97,8 @@ namespace BottomsUp.Api.Controllers
         public async Task<IHttpActionResult> PostProposal(Proposal proposal)
         {
             proposal.ModifiedBy = "UNKNOWN";
+            proposal.Created = DateTime.Now;
+            proposal.Updated = DateTime.Now;
 
             if (!ModelState.IsValid)
             {

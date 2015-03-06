@@ -1,0 +1,15 @@
+﻿<h3>New Proposal</h3>
+
+<form name="newProposalForm" novalidate data-ng-submit="save()">
+    <fieldset>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" data-ng-model="newProposal.name" required />
+            <span class="error" style="color: red;" data-ng-show="newProposalForm.name.$error.required">*</span>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Save" data-ng-disabled="newProposalForm.$invalid" />
+            <a href="#/" class="btn btn-default">Cancel</a>
+        </div>
+    </fieldset>
+</form>
