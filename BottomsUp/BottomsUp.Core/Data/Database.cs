@@ -14,7 +14,7 @@ namespace BottomsUp.Core.Data
             : base("DefaultConnection")
         {
             this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Proposal> Propsals { get; set; }
@@ -26,18 +26,19 @@ namespace BottomsUp.Core.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Proposal>().HasMany(c => c.Requirements).WithRequired(d => d.Proposal);
+            
+            //modelBuilder.Entity<Requirement>()
+            //    .HasMany(c => c.Tasks).WithRequired().HasForeignKey(c => c.RequirementId);
 
-            modelBuilder.Entity<Requirement>()
-                .HasMany(c => c.Tasks).WithRequired().HasForeignKey(c => c.RequirementId);
+            //modelBuilder.Entity<Requirement>()
+            //    .HasRequired(c => c.Category).WithMany().HasForeignKey(c => c.CategoryId);
 
-            modelBuilder.Entity<Requirement>()
-                .HasRequired(c => c.Category).WithMany().HasForeignKey(c => c.CategoryId);
+            //modelBuilder.Entity<Proposal>()
+            //   .HasMany(c => c.Requirements).WithRequired().HasForeignKey(c => c.ProposalId);
 
-            modelBuilder.Entity<Proposal>()
-               .HasMany(c => c.Requirements).WithRequired().HasForeignKey(c => c.ProposalId);
-
-            modelBuilder.Entity<Tasking>()
-                .HasRequired(c => c.Labor).WithMany().HasForeignKey(e => e.LaborId);
+            //modelBuilder.Entity<Tasking>()
+            //    .HasRequired(c => c.Labor).WithMany().HasForeignKey(e => e.LaborId);
 
             modelBuilder.Entity<Category>()
                 .HasMany(c => c.Children).WithOptional().HasForeignKey(d => d.ParentId);

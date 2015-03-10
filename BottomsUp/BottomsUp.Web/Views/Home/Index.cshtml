@@ -5,13 +5,12 @@
 }
 
 <div class="container" style="padding-top:40px;">
-    <div ng-controller="IndexCtrl" ng-cloak>
+    <div ng-controller="proposalController" ng-cloak>
         <table class="crud-grid table table-striped table-bordered table-condensed table-hover">
             <tr>
                 <th style="width: 100px;">
                     <div class="btn-toolbar"><i class="btn glyphicon glyphicon-plus" ng-click="toggleAddMode()"></i></div>
                 </th>
-                <th style="width: 50px;">Id</th>
                 <th>Name</th>
                 <th>Modified By</th>
                 <th>Created</th>
@@ -36,7 +35,7 @@
                     <div class="btn-toolbar" ng-show="p.editMode == null || p.editMode == false">
                         <div class="btn-group">
                             <i class="btn glyphicon glyphicon-edit" ng-click="toggleEditMode(p)"></i>
-                            <i class="btn glyphicon glyphicon-trash ng-click="deleteProposal(p)"></i>
+                            <i class="btn glyphicon glyphicon-trash" ng-click="deleteProposal(p)"></i>
                         </div>
                     </div>
                     <div class="btn-toolbar" ng-show="p.editMode == true">
@@ -46,9 +45,8 @@
                         </div>
                     </div>
                 </td>
-                <td>{{p.id}}</td>
                 <td>
-                    <span ng-show="p.editMode == null || p.editMode == false">{{p.name}}</span>
+                    <span ng-show="p.editMode == null || p.editMode == false"><a data-ng-href="/proposals/{{p.id}}">{{p.name}}</a></span>
                     <input ng-model="p.name" ng-show="p.editMode == true" />
                 </td>
                 <td>{{p.modifiedBy}}</td>
@@ -82,7 +80,7 @@
             };
         });
 
-        app.controller('IndexCtrl', function ($scope, $q, proposalFactory, notificationFactory) {
+        app.controller('proposalController', function ($scope, $q, $window, proposalFactory, notificationFactory) {
             $scope.proposals = [];
             $scope.addMode = false;
 
@@ -115,7 +113,10 @@
             };
 
             $scope.deleteProposal = function (proposal) {
-                proposalFactory.delete({ id: proposal.id }, successCallback, errorCallback);
+                var deleteUser = $window.confirm('Are you absolutely sure you want to delete?');
+                if (deleteUser) {
+                    proposalFactory.delete({ id: proposal.id }, successCallback, errorCallback);
+                }
             };
 
             $scope.updateProposal = function (proposal) {
@@ -133,10 +134,4 @@
         });
     </script>
 
-    @*<script src="~/js/home-index.js"></script>
-        <script src="~/js/router.js"></script>
-        <script src="~/js/dataService.js"></script>
-        <script src="~/js/controllers/proposals/singleProposalController.js"></script>
-        <script src="~/js/controllers/proposals/newProposalController.js"></script>
-        <script src="~/js/controllers/proposals/proposalsController.js"></script>*@
 }

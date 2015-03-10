@@ -12,10 +12,7 @@ namespace BottomsUp.Core.Models
         {
             this.Tasks = new List<Tasking>();
         }
-
         public int Id { get; set; }
-        public int ProposalId { get; set; }
-        public int CategoryId { get; set; }
         public string Description { get; set; }
         public string PWSNumber { get; set; }
         public string Comments { get; set; }
@@ -23,10 +20,10 @@ namespace BottomsUp.Core.Models
         public DateTime Created { get; set; }
         public string ModifiedBy { get; set; }
 
-        public Requirement References { get; set; }
-        public ICollection<Tasking> Tasks { get; set; }
-
-        public Category Category { get; set; }
+        public virtual Requirement References { get; set; }
+        public virtual ICollection<Tasking> Tasks { get; set; }
+        public virtual Proposal Proposal { get; set; }
+        public virtual Category Category { get; set; }
 
         public decimal TotalHours
         {

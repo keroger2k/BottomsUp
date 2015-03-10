@@ -13,7 +13,6 @@ namespace BottomsUp.Core.Models
         {
             this.Requirements = new List<Requirement>();
         }
-
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -22,6 +21,6 @@ namespace BottomsUp.Core.Models
         public DateTime Created { get; set; }
         public string ModifiedBy { get; set; }
 
-        public ICollection<Requirement> Requirements { get; set; }
+        public virtual ICollection<Requirement> Requirements { get; set; }
     }
 }

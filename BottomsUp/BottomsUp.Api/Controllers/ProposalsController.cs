@@ -39,21 +39,21 @@ namespace BottomsUp.Api.Controllers
 
         // GET: api/Proposals/5
         [ResponseType(typeof(Proposal))]
-        [Route("api/proposals/{id}/requirements")]
-        public async Task<IHttpActionResult> GetProposalRequirements(int id)
+        [Route("api/v1/proposals/{pid}/requirements")]
+        public async Task<IHttpActionResult> GetProposalRequirements(int pid)
         {
             Proposal proposal = await db.Propsals
                 .Include("Requirements")
                 .Include("Requirements.Category")
                 .Include("Requirements.Tasks")
                 .Include("Requirements.Tasks.Labor")
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == pid);
             if (proposal == null)
             {
                 return NotFound();
             }
 
-            return Ok(proposal);
+            return Ok(proposal.Requirements);
         }
 
         // PUT: api/Proposals/5

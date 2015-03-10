@@ -12,7 +12,12 @@ namespace BottomsUp.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
+
+            routes.MapRoute(
+                name: "DefaultProposals",
+                url: "proposals/{id}",
+                defaults: new { controller = "Proposals", action = "Details", id = UrlParameter.Optional }
+            );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

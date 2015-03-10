@@ -51,7 +51,6 @@ namespace BottomsUp.Core.Migrations
                             Created = DateTime.Now, 
                             ModifiedBy = "Kyle Rogers", 
                             Updated = DateTime.Now,
-                            CategoryId = 1,
                             Tasks = new List<Tasking> {
                                 new Tasking { 
                                     Number = 1, 
@@ -61,7 +60,6 @@ namespace BottomsUp.Core.Migrations
                                     Comments = "First Requirement First Task Comment #1",
                                     Created = DateTime.Now, 
                                     Description = "First Requirement First Task Description #1",
-                                    LaborId = 1
                                 }
                             }
                         },
@@ -72,7 +70,6 @@ namespace BottomsUp.Core.Migrations
                             Created = DateTime.Now, 
                             ModifiedBy = "Kyle Rogers", 
                             Updated = DateTime.Now, 
-                            CategoryId = 3,
                             Tasks = new List<Tasking> {
                                 new Tasking { 
                                     Number = 1, 
@@ -82,7 +79,6 @@ namespace BottomsUp.Core.Migrations
                                     Comments = "Second Requirement First Task Comment #1",
                                     Created = DateTime.Now, 
                                     Description = "Second Requirement First Task Description #1",
-                                    LaborId = 1
                                 }
                             }
                         }

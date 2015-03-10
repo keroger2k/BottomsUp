@@ -12,6 +12,6 @@ namespace BottomsUp.Core.Models
         public int? ParentId { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Category> Children { get; set; }
+        public virtual ICollection<Category> Children { get; set; }
     }
 }

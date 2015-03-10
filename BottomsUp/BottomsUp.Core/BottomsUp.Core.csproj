@@ -67,11 +67,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\BottomsRepository.cs" />
+    <Compile Include="Data\IBottomsRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\LaborCategory.cs" />
+    <Compile Include="Models\ModelFactory.cs" />
+    <Compile Include="Models\ProposalModel.cs" />
     <Compile Include="Models\Requirement.cs" />
-    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\RequirementsModel.cs" />
+    <Compile Include="Models\Tasking.cs" />
+    <Compile Include="Models\TaskingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Proposal.cs" />
     <Compile Include="Services\IProposalService.cs" />

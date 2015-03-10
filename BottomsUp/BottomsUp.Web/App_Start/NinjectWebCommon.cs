@@ -11,6 +11,7 @@ namespace BottomsUp.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using BottomsUp.Core.Services;
+    using BottomsUp.Core.Data;
 
     public static class NinjectWebCommon 
     {
@@ -63,6 +64,7 @@ namespace BottomsUp.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IProposalService>().To<ProposalService>();
+            kernel.Bind<IBottomsRepository>().To<BottomsRepository>();
         }        
     }
 }

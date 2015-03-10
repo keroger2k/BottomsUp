@@ -10,7 +10,6 @@ namespace BottomsUp.Core.Models
     {
         public int Id { get; set; }
         public int RequirementId { get; set; }
-        public int LaborId { get; set; }
         public string Description { get; set; }
         public decimal Percentage { get; set; }
         public decimal Volume { get; set; }
@@ -20,7 +19,8 @@ namespace BottomsUp.Core.Models
         public DateTime Updated { get; set; }
         public DateTime Created { get; set; }
         public string ModifiedBy { get; set; }
-        
-        public LaborCategory Labor { get; set; }
+
+        public virtual Requirement Requirement { get; set; }
+        public virtual LaborCategory Labor { get; set; }
     }
 }

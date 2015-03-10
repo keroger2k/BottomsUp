@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    ViewBag.InitModule = "app";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="padding-top:40px;">
+    div#contentRegion.address
+    <div ng-controller="requirementsController" ng-cloak>
+        <table class="crud-grid table table-striped table-bordered table-condensed table-hover">
+            <tr>
+                <th style="width: 100px;">
+                    <div class="btn-toolbar"><i class="btn glyphicon glyphicon-plus" ng-click="toggleAddMode()"></i></div>
+                </th>
+                <th>Name</th>
+                <th>Modified By</th>
+                <th>Created</th>
+                <th>Updated</th>
+            </tr>
+            <tr ng-show="addMode">
+                <td>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-save" ng-click="addProposal()"></i>
+                            <i class="btn glyphicon glyphicon-remove" ng-click="toggleAddMode()"></i>
+                        </div>
+                    </div>
+                </td>
+                <td></td>
+                <td>
+                    <input ng-model="proposal.name" />
+                </td>
+            </tr>
+            <tr ng-repeat="r in requirements | orderBy:'id':true">
+                <td>
+                    <div class="btn-toolbar" ng-show="r.editMode == null || r.editMode == false">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-edit" ng-click="toggleEditMode(r)"></i>
+                            <i class="btn glyphicon glyphicon-trash" ng-click="deleteProposal(r)"></i>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar" ng-show="r.editMode == true">
+                        <div class="btn-group">
+                            <i class="btn glyphicon glyphicon-save" ng-click="updateProposal(r)"></i>
+                            <i class="btn glyphicon glyphicon-remove" ng-click="toggleEditMode(r)"></i>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span ng-show="r.editMode == null || r.editMode == false"><a href="">{{r.description}}</a></span>
+                    <input ng-model="r.description" ng-show="r.editMode == true" />
+                </td>
+                <td>{{r.modifiedBy}}</td>
+                <td>{{r.created | date:'medium' }}</td>
+                <td>{{r.updated | date:'medium'}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        var app = angular.module('app', ['ngResource', 'ngRoute']);
+
+        app.factory('requirementsFactory', function ($http, $resource, $routeParams) {
+            return $resource('/api/v1/proposals/:pid/requirements/:rid',
+                {  rid: '@@id', pid: 8 },
+                { 'update': { method: 'PUT' } },
+                { 'query': { method: 'GET', isArray: false } });
+        });
+
+        app.factory('notificationFactory', function () {
+            return {
+                success: function () {
+                    toastr.success("Success");
+                },
+                error: function (text) {
+                    toastr.error(text, "Error");
+                }
+            };
+        });
+
+        app.controller('requirementsController', function ($scope, $q, $window, requirementsFactory, notificationFactory) {
+            $scope.requirements = [];
+            $scope.addMode = false;
+
+            $scope.toggleAddMode = function () {
+                $scope.addMode = !$scope.addMode;
+            };
+
+            $scope.toggleEditMode = function (requirement) {
+                requirement.editMode = !requirement.editMode;
+            };
+
+            var successCallback = function (e, cb) {
+                notificationFactory.success();
+                $scope.getRequirement(cb);
+            };
+
+            var successPostCallback = function (e) {
+                successCallback(e, function () {
+                    $scope.toggleAddMode();
+                    $scope.requirement = {};
+                });
+            };
+
+            var errorCallback = function (e) {
+                notificationFactory.error(e.data.Message);
+            };
+
+            $scope.addRequirement = function () {
+                requirementsFactory.save($scope.requirement, successPostCallback, errorCallback);
+            };
+
+            $scope.deleteRequirement = function (requirement) {
+                var deleteRequirement = $window.confirm('Are you absolutely sure you want to delete?');
+                if (deleteRequirement) {
+                    requirementsFactory.delete({ id: requirement.id }, successCallback, errorCallback);
+                }
+            };
+
+            $scope.updateProposal = function (requirement) {
+                requirementsFactory.update({ id: requirement.id }, requirement, successCallback, errorCallback);
+            };
+
+            $scope.getRequirements = function (cb) {
+                requirementsFactory.query(function (data) {
+                    $scope.requirements = data;
+                    if (cb) cb();
+                });
+            };
+
+            $scope.getRequirements();
+        });
+    </script>
+
+}
+

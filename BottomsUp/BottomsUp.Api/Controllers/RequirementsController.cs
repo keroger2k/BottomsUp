@@ -33,13 +33,13 @@ namespace BottomsUp.Api.Controllers
 
         // GET: api/Requirements/5
         [ResponseType(typeof(IEnumerable<Tasking>))]
-        [Route("api/requirements/{id}/tasks")]
-        public async Task<IHttpActionResult> GetRequirementTasks(int id)
+        [Route("api/v1/proposals/{pid}/requirements/{rid}/tasks")]
+        public async Task<IHttpActionResult> GetRequirementTasks(int pid, int rid)
         {
             Requirement requirement = await db.Requirements
                 .Include("Tasks")
                 .Include("Tasks.Labor")
-                .FirstOrDefaultAsync(c => c.Id == id);
+                .FirstOrDefaultAsync(c => c.Id == rid);
             if (requirement == null)
             {
                 return NotFound();
@@ -50,14 +50,14 @@ namespace BottomsUp.Api.Controllers
 
         // PUT: api/Requirements/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutRequirement(int id, Requirement requirement)
+        public async Task<IHttpActionResult> PutRequirement(int pid, Requirement requirement)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != requirement.Id)
+            if (pid != requirement.Id)
             {
                 return BadRequest();
             }
@@ -70,7 +70,7 @@ namespace BottomsUp.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RequirementExists(id))
+                if (!RequirementExists(pid))
                 {
                     return NotFound();
                 }
@@ -85,17 +85,30 @@ namespace BottomsUp.Api.Controllers
 
         // POST: api/Requirements
         [ResponseType(typeof(Requirement))]
-        public async Task<IHttpActionResult> PostRequirement(Requirement requirement)
+        [Route("api/v1/proposals/{pid}/requirements")]
+        public async Task<IHttpActionResult> PostRequirement(int pid, Requirement requirement)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Requirements.Add(requirement);
+            var proposal = db.Propsals.Find(pid);
+
+            if (proposal == null)
+            {
+                return BadRequest();
+            }
+
+            requirement.Created = DateTime.Now;
+            requirement.ModifiedBy = "UNKNOWN";
+            requirement.Updated = DateTime.Now;
+
+            proposal.Requirements.Add(requirement);
+
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = requirement.Id }, requirement);
+            return CreatedAtRoute("requirements", new { rid = requirement.Id }, requirement);
         }
 
         // DELETE: api/Requirements/5
