@@ -1,5 +1,6 @@
 ﻿using BottomsUp.Core.Data;
 using BottomsUp.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace BottomsUp.Web.Controllers
 
 
         // GET: api/v1/proposals
-        [ResponseType(typeof(Proposal))]
+        [ResponseType(typeof(ProposalModel))]
         public IEnumerable<ProposalModel> GetPropsals(bool includeRequirements = false)
         {
             IQueryable<Proposal> query;
@@ -35,11 +36,11 @@ namespace BottomsUp.Web.Controllers
                 query = _repo.GetAllProposals();
             }
             return query.ToList().Select(c => _modelFactory.Create(c));
-;
+            ;
         }
 
         // GET: api/v1/proposals/5
-        [ResponseType(typeof(Proposal))]
+        [ResponseType(typeof(ProposalModel))]
         public async Task<IHttpActionResult> GetProposal(int pid, bool includeRequirements = false)
         {
             Proposal prop;
@@ -48,7 +49,8 @@ namespace BottomsUp.Web.Controllers
             {
                 prop = await _repo.GetProposalWithRequirementsAsync(pid);
             }
-            else {
+            else
+            {
                 prop = await _repo.GetProposalAsync(pid);
             }
 
@@ -57,12 +59,12 @@ namespace BottomsUp.Web.Controllers
                 return NotFound();
             }
 
-            return Ok(prop);
+            return Ok(_modelFactory.Create(prop));
         }
 
         // PUT: api/v1/proposals/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutProposal(int id, Proposal proposal)
+        public async Task<IHttpActionResult> PutProposal(int id, ProposalModel proposal)
         {
             if (!ModelState.IsValid)
             {
@@ -77,9 +79,9 @@ namespace BottomsUp.Web.Controllers
             try
             {
                 proposal.ModifiedBy = "UNKNOWN";
-                _repo.UpdateProposal(proposal);
+                //_repo.UpdateProposal(proposal);
                 await _repo.SaveAsync();
-            
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -97,23 +99,30 @@ namespace BottomsUp.Web.Controllers
         }
 
         // POST: api/v1/proposals
-        [ResponseType(typeof(Proposal))]
-        public async Task<IHttpActionResult> PostProposal(Proposal proposal)
+        [ResponseType(typeof(ProposalModel))]
+        public async Task<IHttpActionResult> PostProposal(ProposalModel proposal)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                proposal.ModifiedBy = "UNKNOWN";
+                var entity = _modelFactory.Parse(proposal);
+                _repo.AddProposal(entity);
+                await _repo.SaveAsync();
+                return CreatedAtRoute("proposals", new { id = entity.Id }, entity);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
 
-            proposal.ModifiedBy = "UNKNOWN";
-            _repo.AddProposal(proposal);
-            await _repo.SaveAsync();
-
-            return CreatedAtRoute("proposals", new { id = proposal.Id }, proposal);
         }
 
         // DELETE: api/v1/proposals/5
-        [ResponseType(typeof(Proposal))]
+        [ResponseType(typeof(ProposalModel))]
         public async Task<IHttpActionResult> DeleteProposal(int id)
         {
             Proposal proposal = await _repo.GetProposalAsync(id);
@@ -127,7 +136,7 @@ namespace BottomsUp.Web.Controllers
             await _repo.SaveAsync();
 
             return Ok(proposal);
-        }        
+        }
 
         private bool ProposalExists(int id)
         {

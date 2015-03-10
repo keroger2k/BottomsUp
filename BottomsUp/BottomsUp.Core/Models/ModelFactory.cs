@@ -56,5 +56,20 @@ namespace BottomsUp.Core.Models
             };
         }
 
+
+        public Proposal Parse(ProposalModel proposal)
+        {
+            try
+            {
+                var entry = new Proposal();
+                entry.Name = proposal.Name;
+                entry.ModifiedBy = proposal.ModifiedBy;
+                return entry;
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }
