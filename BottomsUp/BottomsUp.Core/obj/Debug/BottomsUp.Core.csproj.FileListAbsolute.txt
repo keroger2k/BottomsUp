@@ -31,3 +31,9 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\Enti
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.dll
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.pdb
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.dll
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.Net4.dll
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.pdb
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.xml
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.Net4.pdb
+C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.csprojResolveAssemblyReference.cache

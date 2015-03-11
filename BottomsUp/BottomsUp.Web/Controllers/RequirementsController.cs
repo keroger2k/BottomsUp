@@ -14,62 +14,64 @@ using BottomsUp.Core.Models;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class RequirementsController : ApiController
+    public class RequirementsController : BaseController
     {
-        private DatabaseContext db = new DatabaseContext();
-
-        // GET: api/Requirements/5
-        [ResponseType(typeof(Requirement))]
-        public async Task<IHttpActionResult> GetRequirement(int pid)
+        public RequirementsController(IBottomsRepository repo)
+            : base(repo)
         {
-            var proposal = await db.Propsals.FindAsync(pid);
+
+        }
+       
+        // GET: api/Requirements/5
+        [ResponseType(typeof(RequirementsModel))]
+        public async Task<IHttpActionResult> GetRequirements(int pid, bool includeTasks = false)
+        {
+            IQueryable<Proposal> props;
+
+            if (includeTasks)
+            {
+                props = _repo.GetAllProposalsWithRequirementsAndTasks();
+            }
+            else
+            {
+                props = _repo.GetAllProposalsWithRequirements();
+            }
+
+            var proposal = await props.FirstOrDefaultAsync(c => c.Id == pid);
+
+
             if (proposal == null)
             {
                 return NotFound();
             }
-
-            return Ok(proposal.Requirements);
-        }
-
-        // GET: api/Requirements/5
-        [ResponseType(typeof(IEnumerable<Tasking>))]
-        public async Task<IHttpActionResult> GetRequirementTasks(int pid, int rid)
-        {
-            Requirement requirement = await db.Requirements
-                .Include("Tasks")
-                .Include("Tasks.Labor")
-                .FirstOrDefaultAsync(c => c.Id == rid);
-            if (requirement == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(requirement.Tasks);
+            var pModel = _modelFactory.Create(proposal);
+            return Ok(pModel.Requirements);
         }
 
         // PUT: api/Requirements/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutRequirement(int pid, Requirement requirement)
+        public async Task<IHttpActionResult> PutRequirement(int pid, int rid, RequirementsModel requirement)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (pid != requirement.Id)
+            if (rid != requirement.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(requirement).State = EntityState.Modified;
-
             try
             {
+                requirement.ModifiedBy = "UNKNOWN";
+                var entity = _modelFactory.Parse(requirement);
+                _repo.UpdateRequirement(entity);
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RequirementExists(pid))
+                if (!RequirementExists(pid, requirement.Id))
                 {
                     return NotFound();
                 }
@@ -82,59 +84,53 @@ namespace BottomsUp.Web.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Requirements
-        [ResponseType(typeof(Requirement))]
-        public async Task<IHttpActionResult> PostRequirement(int pid, Requirement requirement)
+        //// POST: api/Requirements
+        //[ResponseType(typeof(Requirement))]
+        //public async Task<IHttpActionResult> PostRequirement(int pid, Requirement requirement)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    var proposal = db.Propsals.Find(pid);
+        //    if (proposal == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    requirement.Created = DateTime.Now;
+        //    requirement.ModifiedBy = "UNKNOWN";
+        //    requirement.Updated = DateTime.Now;
+        //    proposal.Requirements.Add(requirement);
+
+        //    await db.SaveChangesAsync();
+
+        //    return CreatedAtRoute("requirements", new { rid = requirement.Id }, requirement);
+        //}
+
+        //// DELETE: api/Requirements/5
+        //[ResponseType(typeof(Requirement))]
+        //public async Task<IHttpActionResult> DeleteRequirement(int id)
+        //{
+        //    Requirement requirement = await db.Requirements.FindAsync(id);
+        //    if (requirement == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.Requirements.Remove(requirement);
+        //    await db.SaveChangesAsync();
+
+        //    return Ok(requirement);
+        //}
+
+        private bool RequirementExists(int pid, int rid)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var proposal = db.Propsals.Find(pid);
-            if (proposal == null)
-            {
-                return BadRequest();
-            }
-
-            requirement.Created = DateTime.Now;
-            requirement.ModifiedBy = "UNKNOWN";
-            requirement.Updated = DateTime.Now;
-            proposal.Requirements.Add(requirement);
-
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("requirements", new { rid = requirement.Id }, requirement);
-        }
-
-        // DELETE: api/Requirements/5
-        [ResponseType(typeof(Requirement))]
-        public async Task<IHttpActionResult> DeleteRequirement(int id)
-        {
-            Requirement requirement = await db.Requirements.FindAsync(id);
-            if (requirement == null)
-            {
-                return NotFound();
-            }
-
-            db.Requirements.Remove(requirement);
-            await db.SaveChangesAsync();
-
-            return Ok(requirement);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool RequirementExists(int id)
-        {
-            return db.Requirements.Count(e => e.Id == id) > 0;
+            var proposal = _repo.GetAllProposalsWithRequirements().FirstOrDefault(c => c.Id == pid);
+            return proposal != null &&
+                proposal.Requirements != null &&
+                proposal.Requirements.Count(e => e.Id == rid) > 0;
         }
     }
 }

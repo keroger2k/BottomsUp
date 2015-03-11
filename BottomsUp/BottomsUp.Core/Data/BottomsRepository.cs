@@ -27,6 +27,15 @@ namespace BottomsUp.Core.Data
             return _db.Propsals.Include(c => c.Requirements);
         }
 
+        public IQueryable<Proposal> GetAllProposalsWithRequirementsAndTasks()
+        {
+            return _db.Propsals
+                .Include("Requirements")
+                .Include("Requirements.Category")
+                .Include("Requirements.Tasks")
+                .Include("Requirements.Tasks.Labor");
+        }
+
         public async Task<Proposal> GetProposalAsync(int id)
         {
             return await _db.Propsals.FindAsync(id);
@@ -50,8 +59,14 @@ namespace BottomsUp.Core.Data
             if (p != null)
             {
                 proposal.Updated = DateTime.Now;
-                _db.Entry(proposal).State = EntityState.Modified;   
+                _db.Entry(proposal).State = EntityState.Modified;
             }
+        }
+
+        public void UpdateRequirement(Requirement requirement)
+        {
+            requirement.Updated = DateTime.Now;
+            _db.Entry(requirement).State = EntityState.Modified;
         }
 
         public void RemoveProposal(int id)

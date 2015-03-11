@@ -9,8 +9,6 @@ namespace BottomsUp.Core.Models
     public class RequirementsModel
     {
         public int Id { get; set; }
-        public int ProposalId { get; set; }
-        public int CategoryId { get; set; }
         public string Description { get; set; }
         public string PWSNumber { get; set; }
         public string Comments { get; set; }

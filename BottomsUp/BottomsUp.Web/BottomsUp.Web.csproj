@@ -212,6 +212,7 @@
     <Compile Include="Areas\RouteDebugger\RequestHelper.cs" />
     <Compile Include="Areas\RouteDebugger\RouteDebuggerAreaRegistration.cs" />
     <Compile Include="Areas\RouteDebugger\RouteDebuggerConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProposalsController.cs" />
     <Compile Include="Controllers\RequirementsController.cs" />
@@ -357,6 +358,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Proposals1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

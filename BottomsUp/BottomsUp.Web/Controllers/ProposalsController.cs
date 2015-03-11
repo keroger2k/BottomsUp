@@ -11,22 +11,19 @@ using System.Web.Http.Description;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class ProposalsController : ApiController
+    public class ProposalsController : BaseController
     {
-        private readonly IBottomsRepository _repo;
-        private readonly ModelFactory _modelFactory;
         public ProposalsController(IBottomsRepository repo)
+            : base(repo)
         {
-            _repo = repo;
-            _modelFactory = new ModelFactory();
-        }
 
+        }
 
         // GET: api/v1/proposals
         [ResponseType(typeof(ProposalModel))]
-        public IEnumerable<ProposalModel> GetPropsals(bool includeRequirements = false)
+        public IHttpActionResult GetPropsals(bool includeRequirements = false)
         {
-            IQueryable<Proposal> query;
+            IEnumerable<Proposal> query;
             if (includeRequirements)
             {
                 query = _repo.GetAllProposalsWithRequirements();
@@ -35,8 +32,7 @@ namespace BottomsUp.Web.Controllers
             {
                 query = _repo.GetAllProposals();
             }
-            return query.ToList().Select(c => _modelFactory.Create(c));
-            ;
+            return Ok(query.ToList().Select(c => _modelFactory.Create(c)));
         }
 
         // GET: api/v1/proposals/5
@@ -79,9 +75,9 @@ namespace BottomsUp.Web.Controllers
             try
             {
                 proposal.ModifiedBy = "UNKNOWN";
-                //_repo.UpdateProposal(proposal);
+                var entity = _modelFactory.Parse(proposal);
+                _repo.UpdateProposal(entity);
                 await _repo.SaveAsync();
-
             }
             catch (DbUpdateConcurrencyException)
             {

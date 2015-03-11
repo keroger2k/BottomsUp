@@ -12,10 +12,12 @@ namespace BottomsUp.Core.Data
         void AddProposal(Proposal proposal);
         IQueryable<Proposal> GetAllProposals();
         IQueryable<Proposal> GetAllProposalsWithRequirements();
+        IQueryable<Proposal> GetAllProposalsWithRequirementsAndTasks();
         Task<Proposal> GetProposalAsync(int id);
         Task<Proposal> GetProposalWithRequirementsAsync(int id);
         void RemoveProposal(int id);
         Task<int> SaveAsync();
         void UpdateProposal(Proposal proposal);
+        void UpdateRequirement(Requirement requirement);
     }
 }

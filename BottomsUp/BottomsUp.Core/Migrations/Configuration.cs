@@ -51,8 +51,10 @@ namespace BottomsUp.Core.Migrations
                             Created = DateTime.Now, 
                             ModifiedBy = "Kyle Rogers", 
                             Updated = DateTime.Now,
+                            Category = context.Categories.FirstOrDefault(),
                             Tasks = new List<Tasking> {
                                 new Tasking { 
+                                    Labor = context.LaborCategories.FirstOrDefault(),
                                     Number = 1, 
                                     Percentage = 100, 
                                     Volume = 1, 
@@ -70,8 +72,10 @@ namespace BottomsUp.Core.Migrations
                             Created = DateTime.Now, 
                             ModifiedBy = "Kyle Rogers", 
                             Updated = DateTime.Now, 
+                            Category = context.Categories.FirstOrDefault(),
                             Tasks = new List<Tasking> {
                                 new Tasking { 
+                                    Labor = context.LaborCategories.FirstOrDefault(),
                                     Number = 1, 
                                     Percentage = 100, 
                                     Volume = 1, 

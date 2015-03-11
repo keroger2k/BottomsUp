@@ -26,7 +26,11 @@ namespace BottomsUp.Core.Models
         {
             return new RequirementsModel
             {
-                Category = requirement.Category,
+                Category = new Category
+                {
+                    Id = requirement.Category.Id,
+                    Name = requirement.Category.Name
+                },
                 Comments = requirement.Comments,
                 Updated = requirement.Updated,
                 Created = requirement.Created,
@@ -47,7 +51,10 @@ namespace BottomsUp.Core.Models
                 Created = task.Created,
                 Description = task.Description,
                 Id = task.Id,
-                Labor = task.Labor,
+                Labor = new LaborCategory {
+                    Id = task.Labor.Id,
+                    Name = task.Labor.Name
+                },
                 ModifiedBy = task.ModifiedBy,
                 Number = task.Number,
                 Percentage = task.Percentage,
@@ -62,8 +69,30 @@ namespace BottomsUp.Core.Models
             try
             {
                 var entry = new Proposal();
+                entry.Id = proposal.Id;
                 entry.Name = proposal.Name;
                 entry.ModifiedBy = proposal.ModifiedBy;
+                entry.Updated = proposal.Updated;
+                entry.Created = proposal.Created;
+                return entry;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Requirement Parse(RequirementsModel requirement)
+        {
+            try
+            {
+                var entry = new Requirement();
+                entry.PWSNumber = requirement.PWSNumber;
+                entry.Id = requirement.Id;
+                entry.Description = requirement.Description;
+                entry.Created = requirement.Created;
+                entry.Updated = requirement.Updated;
+                entry.References = requirement.References;
                 return entry;
             }
             catch
