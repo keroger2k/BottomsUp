@@ -18,7 +18,7 @@ namespace BottomsUp.Web.Tests
     public class ProposalControllerTests
     {
         [Test]
-        public void get_returns_proposal_list()
+        public void ProposalsController_Get()
         {
             // Arrange
             var repo = A.Fake<IBottomsRepository>();
@@ -35,6 +35,8 @@ namespace BottomsUp.Web.Tests
             Assert.IsNotNull(contentResult);
             Assert.IsNotNull(contentResult.Content);
             Assert.AreEqual(1, contentResult.Content.Count());
+            A.CallTo(() => repo.GetAllProposals()).MustHaveHappened();
+            A.CallTo(() => repo.GetAllProposalsWithRequirements()).MustNotHaveHappened();
         }
 
         [Test]
@@ -58,9 +60,13 @@ namespace BottomsUp.Web.Tests
         private IQueryable<Proposal> GetProposals()
         {
             return new List<Proposal>() { 
-                new Proposal { Id =1, Requirements = 
-                    new List<Requirement>() {
-                        new Requirement { Id = 1 }
+                new Proposal { 
+                    Id =1, 
+                    Requirements = new List<Requirement>() {
+                        new Requirement { 
+                            Id = 1,
+                            Category = new Category { Id = 1, Name = "Cat1" }
+                        }
                     }
                 }
             }.AsQueryable();

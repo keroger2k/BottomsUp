@@ -67,7 +67,7 @@ namespace BottomsUp.Web.Controllers
                 requirement.ModifiedBy = "UNKNOWN";
                 var entity = _modelFactory.Parse(requirement);
                 _repo.UpdateRequirement(entity);
-                await db.SaveChangesAsync();
+                await _repo.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
