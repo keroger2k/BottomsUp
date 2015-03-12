@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -36,19 +37,23 @@ namespace BottomsUp.Web.Tests
             Assert.AreEqual(1, contentResult.Content.Count());
         }
 
-        //[Test]
-        //public async void GetProposal_ShouldNotFindProduct()
-        //{
-        //    //// Arrange
-        //    //var repo = A.Fake<IBottomsRepository>();
+        [Test]
+        public void ProposalController_Post()
+        {
+            // Arranges
+            var repo = A.Fake<IBottomsRepository>();
+            var controller = new ProposalsController(repo);
 
-        //    //A.CallTo(() => repo.GetProposalAsync(999)).Returns(null);
+            // Act
+            IHttpActionResult actionResult = controller.PostProposal(new ProposalModel { Id= 10 }).Result;
+            var createdResult = actionResult as CreatedAtRouteNegotiatedContentResult<Proposal>;
 
-        //    //var controller = new ProposalsController(repo);
+            // Assert
+            Assert.IsNotNull(createdResult);
+            Assert.AreEqual("proposals", createdResult.RouteName);
+            Assert.AreEqual(10, createdResult.RouteValues["id"]);
 
-        //    //IHttpActionResult result = await controller.GetProposal(999) as OkNegotiatedContentResult<ProposalModel>;
-        //    //Assert.IsInstanceOfType(typeof(NotFoundResult), result);
-        //}
+        }
 
         private IQueryable<Proposal> GetProposals()
         {
