@@ -30,3 +30,5 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\obj\Debu
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\obj\Debug\BottomsUp.Core.Tests.pdb
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\FakeItEasy.dll
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\FakeItEasy.xml
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\FakeItEasy.dll
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core.Tests\bin\Debug\FakeItEasy.xml

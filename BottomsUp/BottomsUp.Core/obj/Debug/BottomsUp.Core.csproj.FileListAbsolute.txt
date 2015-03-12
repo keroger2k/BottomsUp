@@ -37,3 +37,4 @@ C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.xml
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\bin\Debug\AutoMapper.Net4.pdb
 C:\Users\keroger2k\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.csprojResolveAssemblyReference.cache
+C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Core\obj\Debug\BottomsUp.Core.csprojResolveAssemblyReference.cache
