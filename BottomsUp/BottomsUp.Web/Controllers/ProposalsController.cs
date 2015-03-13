@@ -131,7 +131,7 @@ namespace BottomsUp.Web.Controllers
 
             await _repo.SaveAsync();
 
-            return Ok(proposal);
+            return Ok(_modelFactory.Create(proposal));
         }
 
         private bool ProposalExists(int id)

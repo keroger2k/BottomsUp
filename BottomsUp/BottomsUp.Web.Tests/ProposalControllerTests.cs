@@ -135,11 +135,11 @@ namespace BottomsUp.Web.Tests
 
             // Act
             IHttpActionResult actionResult = controller.DeleteProposal(1).Result;
-            var contentResult = actionResult as OkNegotiatedContentResult<Proposal>;
+            var contentResult = actionResult as OkNegotiatedContentResult<ProposalModel>;
 
             // Assert
             Assert.IsNotNull(contentResult);
-            Assert.IsInstanceOf<Proposal>(contentResult.Content);
+            Assert.IsInstanceOf<ProposalModel>(contentResult.Content);
             A.CallTo(() => repo.RemoveProposal(A<int>.Ignored)).MustHaveHappened();
             A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
         }
