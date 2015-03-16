@@ -24,7 +24,7 @@ namespace BottomsUp.Web.Controllers
        
         // GET: api/Requirements/5
         [ResponseType(typeof(RequirementsModel))]
-        public async Task<IHttpActionResult> GetRequirements(int pid, bool includeTasks = false)
+        public IHttpActionResult GetRequirements(int pid, bool includeTasks = false)
         {
             IQueryable<Proposal> props;
 
@@ -37,7 +37,7 @@ namespace BottomsUp.Web.Controllers
                 props = _repo.GetAllProposalsWithRequirements();
             }
 
-            var proposal = await props.FirstOrDefaultAsync(c => c.Id == pid);
+            var proposal =  props.FirstOrDefault(c => c.Id == pid);
 
 
             if (proposal == null)
