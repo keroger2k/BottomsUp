@@ -14,46 +14,61 @@ using BottomsUp.Core.Models;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class TaskingsController : ApiController
+    public class TaskingsController : BaseController
     {
-        private DatabaseContext db = new DatabaseContext();
+        public TaskingsController(IBottomsRepository repo)
+            : base(repo)
+        {
+
+        }
 
         // GET: api/v1/proposals/{pid}/requirements/{rid}/tasks
-        [ResponseType(typeof(IEnumerable<Tasking>))]
-        public async Task<IHttpActionResult> GetTasks(int pid, int rid)
+        [ResponseType(typeof(IEnumerable<TaskingModel>))]
+        public IHttpActionResult GetTasks(int pid, int rid)
         {
-            var proposal = await db.Requirements.FirstOrDefaultAsync(c => c.Id == rid);
+            IQueryable<Proposal> props = _repo.GetAllProposalsWithRequirementsAndTasks();
+            var proposal = props.FirstOrDefault(c => c.Id == pid);
+
             if (proposal == null)
             {
                 return NotFound();
             }
 
-            return Ok(proposal.Tasks);
+            var req = proposal.Requirements.FirstOrDefault(c => c.Id == rid);
+
+            if (req == null)
+            {
+                return NotFound();
+            }
+
+            var pModel = _modelFactory.Create(req);
+            return Ok(pModel.Tasks);
         }
-        
+
         // PUT: api/Taskings/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTasking(int id, Tasking tasking)
+        public async Task<IHttpActionResult> PutTasking(int pid, int rid, int tid, TaskingModel tasking)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != tasking.Id)
+            if (tid != tasking.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(tasking).State = EntityState.Modified;
-
             try
             {
-                await db.SaveChangesAsync();
+                tasking.ModifiedBy = "UNKNOWN";
+                var entity = _modelFactory.Parse(tasking);
+                _repo.UpdateTasking(entity);
+                await _repo.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TaskingExists(id))
+                if (!TaskingExists(pid, rid, tid))
                 {
                     return NotFound();
                 }
@@ -67,58 +82,81 @@ namespace BottomsUp.Web.Controllers
         }
 
         // POST: api/Taskings
-        [ResponseType(typeof(Tasking))]
-        public async Task<IHttpActionResult> PostTasking(int pid, int rid, Tasking tasking)
+        [ResponseType(typeof(TaskingModel))]
+        public async Task<IHttpActionResult> PostTasking(int pid, int rid, TaskingModel tasking)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var requirement = db.Requirements.Find(rid);
-            if (requirement == null)
+            var proposal = _repo.GetAllProposalsWithRequirements().ToList().FirstOrDefault(c => c.Id == pid);
+            if (proposal == null)
             {
                 return BadRequest();
             }
 
-            tasking.Updated = DateTime.Now;
+            var req = proposal.Requirements.FirstOrDefault(c => c.Id == rid);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
+
+
+
             tasking.Created = DateTime.Now;
             tasking.ModifiedBy = "UNKNOWN";
-            requirement.Tasks.Add(tasking);
-            
-            await db.SaveChangesAsync();
+            tasking.Updated = DateTime.Now;
+            req.Tasks.Add(_modelFactory.Parse(tasking));
 
-            return CreatedAtRoute("tasks", new { tid = tasking.Id }, tasking);
+            await _repo.SaveAsync();
+
+            return CreatedAtRoute("tasking", new { tid = tasking.Id }, tasking);
         }
 
         // DELETE: api/Taskings/5
-        [ResponseType(typeof(Tasking))]
-        public async Task<IHttpActionResult> DeleteTasking(int id)
+        [ResponseType(typeof(TaskingModel))]
+        public async Task<IHttpActionResult> DeleteTasking(int pid, int rid, int tid)
         {
-            Tasking tasking = await db.Tasks.FindAsync(id);
-            if (tasking == null)
+            Proposal prop = _repo.GetAllProposalsWithRequirementsAndTasks()
+                .FirstOrDefault(c => c.Id == pid);
+
+            if (prop == null)
             {
                 return NotFound();
             }
 
-            db.Tasks.Remove(tasking);
-            await db.SaveChangesAsync();
+            Requirement requirement = prop.Requirements.FirstOrDefault(c => c.Id == rid);
 
-            return Ok(tasking);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            if (requirement == null)
             {
-                db.Dispose();
+                return NotFound();
             }
-            base.Dispose(disposing);
+
+            Tasking task = requirement.Tasks.FirstOrDefault(c => c.Id == tid);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            requirement.Tasks.Remove(task);
+            await _repo.SaveAsync();
+
+            return Ok(_modelFactory.Create(task));
         }
 
-        private bool TaskingExists(int id)
+        private bool TaskingExists(int pid, int rid, int tid)
         {
-            return db.Tasks.Count(e => e.Id == id) > 0;
+            var proposal = _repo.GetAllProposalsWithRequirements()
+                .ToList()
+                .FirstOrDefault(c => c.Id == pid);
+            if (proposal == null) return false;
+            var req = proposal.Requirements.FirstOrDefault(c => c.Id == rid);
+            return req != null &&
+                req.Tasks != null &&
+                req.Tasks.Count(e => e.Id == tid) > 0;
         }
     }
 }

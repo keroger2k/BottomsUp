@@ -69,6 +69,12 @@ namespace BottomsUp.Core.Data
             _db.Entry(requirement).State = EntityState.Modified;
         }
 
+        public void UpdateTasking(Tasking task)
+        {
+            task.Updated = DateTime.Now;
+            _db.Entry(task).State = EntityState.Modified;
+        }
+
         public void RemoveProposal(int id)
         {
             Proposal proposal = _db.Propsals.Find(id);

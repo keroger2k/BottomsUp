@@ -63,7 +63,6 @@ namespace BottomsUp.Core.Models
             };
         }
 
-
         public Proposal Parse(ProposalModel proposal)
         {
             try
@@ -93,6 +92,29 @@ namespace BottomsUp.Core.Models
                 entry.Created = requirement.Created;
                 entry.Updated = requirement.Updated;
                 entry.References = requirement.References;
+                return entry;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Tasking Parse(TaskingModel task)
+        {
+            try
+            {
+                var entry = new Tasking();
+                entry.Comments = task.Comments;
+                entry.Created = task.Created;
+                entry.Description = task.Description;
+                entry.Id = task.Id;
+                entry.Labor = task.Labor;
+                entry.ModifiedBy = task.ModifiedBy;
+                entry.Number = task.Number;
+                entry.Percentage = task.Percentage;
+                entry.Updated = task.Updated;
+                entry.Volume = task.Volume;
                 return entry;
             }
             catch

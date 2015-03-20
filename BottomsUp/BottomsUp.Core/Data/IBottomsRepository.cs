@@ -19,5 +19,6 @@ namespace BottomsUp.Core.Data
         Task<int> SaveAsync();
         void UpdateProposal(Proposal proposal);
         void UpdateRequirement(Requirement requirement);
+        void UpdateTasking(Tasking task);
     }
 }
