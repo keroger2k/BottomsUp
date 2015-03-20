@@ -84,50 +84,61 @@ namespace BottomsUp.Web.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        //// POST: api/Requirements
-        //[ResponseType(typeof(Requirement))]
-        //public async Task<IHttpActionResult> PostRequirement(int pid, Requirement requirement)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // POST: api/Requirements
+        [ResponseType(typeof(RequirementsModel))]
+        public async Task<IHttpActionResult> PostRequirement(int pid, RequirementsModel requirement)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    var proposal = db.Propsals.Find(pid);
-        //    if (proposal == null)
-        //    {
-        //        return BadRequest();
-        //    }
+            var proposal = _repo.GetAllProposalsWithRequirements().ToList().FirstOrDefault(c => c.Id == pid);
+            if (proposal == null)
+            {
+                return BadRequest();
+            }
 
-        //    requirement.Created = DateTime.Now;
-        //    requirement.ModifiedBy = "UNKNOWN";
-        //    requirement.Updated = DateTime.Now;
-        //    proposal.Requirements.Add(requirement);
+            requirement.Created = DateTime.Now;
+            requirement.ModifiedBy = "UNKNOWN";
+            requirement.Updated = DateTime.Now;
+            proposal.Requirements.Add(_modelFactory.Parse(requirement));
 
-        //    await db.SaveChangesAsync();
+            await _repo.SaveAsync();
 
-        //    return CreatedAtRoute("requirements", new { rid = requirement.Id }, requirement);
-        //}
+            return CreatedAtRoute("requirements", new { rid = requirement.Id }, requirement);
+        }
 
-        //// DELETE: api/Requirements/5
-        //[ResponseType(typeof(Requirement))]
-        //public async Task<IHttpActionResult> DeleteRequirement(int id)
-        //{
-        //    Requirement requirement = await db.Requirements.FindAsync(id);
-        //    if (requirement == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Requirements/5
+        [ResponseType(typeof(RequirementsModel))]
+        public async Task<IHttpActionResult> DeleteRequirement(int pid, int rid)
+        {
+            Proposal prop = _repo.GetAllProposalsWithRequirements()
+                .FirstOrDefault(c => c.Id == pid);
 
-        //    db.Requirements.Remove(requirement);
-        //    await db.SaveChangesAsync();
+            if (prop == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(requirement);
-        //}
+            Requirement requirement = prop.Requirements.FirstOrDefault(c => c.Id == rid);
+             
+            if (requirement == null)
+            {
+                return NotFound();
+            }
+
+            prop.Requirements.Remove(requirement);
+            await _repo.SaveAsync();
+
+            return Ok(_modelFactory.Create(requirement));
+        }
 
         private bool RequirementExists(int pid, int rid)
         {
-            var proposal = _repo.GetAllProposalsWithRequirements().FirstOrDefault(c => c.Id == pid);
+            var proposal = _repo.GetAllProposalsWithRequirements()
+                .ToList()
+                .FirstOrDefault(c => c.Id == pid);
             return proposal != null &&
                 proposal.Requirements != null &&
                 proposal.Requirements.Count(e => e.Id == rid) > 0;
