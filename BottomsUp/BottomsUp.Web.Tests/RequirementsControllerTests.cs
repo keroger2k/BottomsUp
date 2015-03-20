@@ -27,7 +27,7 @@ namespace BottomsUp.Web.Tests
         }
 
         [Test]
-        public void ProposalsController_Get()
+        public void RequirementsController_Get()
         {
             // Arrange
             A.CallTo(() => repo.GetAllProposalsWithRequirements()).Returns(GetProposals());
@@ -45,7 +45,7 @@ namespace BottomsUp.Web.Tests
         }
 
         [Test]
-        public void ProposalsController_Get_WithRequirements()
+        public void RequirementsController_Get_WithRequirements()
         {
             // Arrange
             A.CallTo(() => repo.GetAllProposalsWithRequirementsAndTasks()).Returns(GetProposals());
@@ -62,103 +62,99 @@ namespace BottomsUp.Web.Tests
             A.CallTo(() => repo.GetAllProposalsWithRequirements()).MustNotHaveHappened();
         }
 
-        ////[Test]
-        //public void ProposalController_Post()
-        //{
-        //    // Arranges
-        //    // Act
-        //    IHttpActionResult actionResult = controller.PostProposal(new ProposalModel { Id= 10 }).Result;
-        //    var contentResult = actionResult as CreatedAtRouteNegotiatedContentResult<Proposal>;
+        [Test]
+        public void RequirementsController_Post()
+        {
+            // Arrange
+            A.CallTo(() => repo.GetAllProposalsWithRequirements()).Returns(GetProposals());
 
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    Assert.AreEqual("proposals", contentResult.RouteName);
-        //    Assert.AreEqual(10, contentResult.RouteValues["id"]);
-        //    A.CallTo(() => repo.AddProposal(A<Proposal>.Ignored)).MustHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
-        //}
+            // Act
+            IHttpActionResult actionResult = controller.PostRequirement(1, new RequirementsModel { Id = 1 }).Result;
+            var contentResult = actionResult as CreatedAtRouteNegotiatedContentResult<RequirementsModel>;
 
-        ////[Test]
-        //public void ProposalController_Invalid_Post()
-        //{
-        //    // Arranges
-        //    // Act
-        //    IHttpActionResult actionResult = controller.PostProposal(null).Result;
-        //    var contentResult = actionResult as BadRequestResult;
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.AreEqual("requirements", contentResult.RouteName);
+            Assert.AreEqual(1, contentResult.RouteValues["rid"]);
+            A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
+        }
 
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    Assert.IsInstanceOf<BadRequestResult>(contentResult);
-        //    A.CallTo(() => repo.AddProposal(A<Proposal>.Ignored)).MustNotHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
-        //}
+        [Test]
+        public void RequirementsController_Post_Proposal_Not_Found()
+        {
+            // Arrange
+            A.CallTo(() => repo.GetAllProposalsWithRequirements()).Returns(GetProposals());
 
-        ////[Test]
-        //public void ProposalController_Put_Mismatch_Ids_BadRequest()
-        //{
-        //    // Arranges
-        //    // Act
-        //    IHttpActionResult actionResult = controller.PutProposal(0, new ProposalModel { Id = 10 }).Result;
-        //    var contentResult = actionResult as BadRequestResult;
+            // Act
+            IHttpActionResult actionResult = controller.PostRequirement(-1, new RequirementsModel { Id = 1 }).Result;
+            var contentResult = actionResult as BadRequestResult;
 
-        //    // Assert
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    Assert.IsInstanceOf<BadRequestResult>(contentResult);
-        //    A.CallTo(() => repo.UpdateProposal(A<Proposal>.Ignored)).MustNotHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
-        //}
+            // Assert
+            Assert.IsNotNull(contentResult);
+            A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
+        }
 
-        ////[Test]
-        //public void ProposalController_Put_Save_Throws_Not_Found()
-        //{
-        //    // Arranges
-        //    A.CallTo(() => repo.GetAllProposals()).Returns(GetProposals());
-        //    A.CallTo(() => repo.SaveAsync()).Throws<DbUpdateConcurrencyException>();
-        //    // Act
-        //    IHttpActionResult actionResult = controller.PutProposal(10, new ProposalModel { Id = 10 }).Result;
-        //    var contentResult = actionResult as NotFoundResult;
+        [Test]
+        public void RequirementsController_Put_Mismatch_Ids_BadRequest()
+        {
+            // Arranges
+            // Act
+            IHttpActionResult actionResult = controller.PutRequirement(0, 1, new RequirementsModel { Id = 10 }).Result;
+            var contentResult = actionResult as BadRequestResult;
 
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    Assert.IsInstanceOf<NotFoundResult>(contentResult);
-        //    A.CallTo(() => repo.UpdateProposal(A<Proposal>.Ignored)).MustHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
-        //}
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.IsInstanceOf<BadRequestResult>(contentResult);
+            A.CallTo(() => repo.UpdateProposal(A<Proposal>.Ignored)).MustNotHaveHappened();
+            A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
+        }
 
-        ////[Test]
-        //public void ProposalController_Delete()
-        //{
-        //    // Arranges
-        //    A.CallTo(() => repo.GetProposalAsync(A<int>.Ignored)).Returns(GetProposals().First());
+        [Test]
+        public void RequirementsController_Put_Save_Throws_Not_Found()
+        {
+            // Arranges
+            A.CallTo(() => repo.GetAllProposals()).Returns(GetProposals());
+            A.CallTo(() => repo.SaveAsync()).Throws<DbUpdateConcurrencyException>();
+            // Act
+            IHttpActionResult actionResult = controller.PutRequirement(10, 1, new RequirementsModel { Id = 1 }).Result;
+            var contentResult = actionResult as NotFoundResult;
 
-        //    // Act
-        //    IHttpActionResult actionResult = controller.DeleteProposal(1).Result;
-        //    var contentResult = actionResult as OkNegotiatedContentResult<ProposalModel>;
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.IsInstanceOf<NotFoundResult>(contentResult);
+            A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
+        }
 
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    Assert.IsInstanceOf<ProposalModel>(contentResult.Content);
-        //    A.CallTo(() => repo.RemoveProposal(A<int>.Ignored)).MustHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
-        //}
+        [Test]
+        public void RequirementsController_Delete()
+        {
+            // Arranges
+            A.CallTo(() => repo.GetAllProposalsWithRequirements()).Returns(GetProposals());
 
-        ////[Test]
-        //public void ProposalController_Delete_NotFound()
-        //{
-        //    // Arranges
-        //    A.CallTo(() => repo.GetProposalAsync(A<int>.Ignored))
-        //        .Returns(Task.FromResult(default(Proposal)));
-             
-        //    // Act
-        //    IHttpActionResult actionResult = controller.DeleteProposal(1).Result;
-        //    var contentResult = actionResult as NotFoundResult;
+            // Act
+            IHttpActionResult actionResult = controller.DeleteRequirement(1, 1).Result;
+            var contentResult = actionResult as OkNegotiatedContentResult<RequirementsModel>;
 
-        //    // Assert
-        //    Assert.IsNotNull(contentResult);
-        //    A.CallTo(() => repo.RemoveProposal(A<int>.Ignored)).MustNotHaveHappened();
-        //    A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
-        //}
+            // Assert
+            Assert.IsNotNull(contentResult);
+            Assert.IsInstanceOf<RequirementsModel>(contentResult.Content);
+            A.CallTo(() => repo.SaveAsync()).MustHaveHappened();
+        }
+
+        [Test]
+        public void RequirementsController_Delete_NotFound()
+        {
+            // Arranges
+            A.CallTo(() => repo.GetAllProposalsWithRequirements()).Returns(GetProposals());
+
+            // Act
+            IHttpActionResult actionResult = controller.DeleteRequirement(-1,-1).Result;
+            var contentResult = actionResult as NotFoundResult;
+
+            // Assert
+            Assert.IsNotNull(contentResult);
+            A.CallTo(() => repo.SaveAsync()).MustNotHaveHappened();
+        }
 
         private IQueryable<Proposal> GetProposals()
         {
