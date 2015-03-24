@@ -14,7 +14,7 @@ using BottomsUp.Core.Models;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class TaskingsController : BaseController
+    public class TaskingsController : BaseApiController
     {
         public TaskingsController(IBottomsRepository repo)
             : base(repo)

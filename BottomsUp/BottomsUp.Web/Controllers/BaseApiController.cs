@@ -9,12 +9,12 @@ using System.Web.Http;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class BaseController : ApiController
+    public class BaseApiController : ApiController
     {
         protected readonly IBottomsRepository _repo;
         protected readonly ModelFactory _modelFactory;
 
-        public BaseController(IBottomsRepository repo)
+        public BaseApiController(IBottomsRepository repo)
         {
             _repo = repo;
             _modelFactory = new ModelFactory();

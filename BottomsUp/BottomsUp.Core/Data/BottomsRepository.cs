@@ -55,12 +55,8 @@ namespace BottomsUp.Core.Data
 
         public void UpdateProposal(Proposal proposal)
         {
-            var p = GetProposalAsync(proposal.Id);
-            if (p != null)
-            {
-                proposal.Updated = DateTime.Now;
-                _db.Entry(proposal).State = EntityState.Modified;
-            }
+            proposal.Updated = DateTime.Now;
+            _db.Entry(proposal).State = EntityState.Modified;
         }
 
         public void UpdateRequirement(Requirement requirement)

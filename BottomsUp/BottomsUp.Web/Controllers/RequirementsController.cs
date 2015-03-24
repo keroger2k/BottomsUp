@@ -14,7 +14,7 @@ using BottomsUp.Core.Models;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class RequirementsController : BaseController
+    public class RequirementsController : BaseApiController
     {
         public RequirementsController(IBottomsRepository repo)
             : base(repo)

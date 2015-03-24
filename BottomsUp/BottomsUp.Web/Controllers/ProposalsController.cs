@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace BottomsUp.Web.Controllers
 {
-    public class ProposalsController : BaseController
+    public class ProposalsController : BaseApiController
     {
         public ProposalsController(IBottomsRepository repo)
             : base(repo)
@@ -60,14 +60,14 @@ namespace BottomsUp.Web.Controllers
 
         // PUT: api/v1/proposals/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutProposal(int id, ProposalModel proposal)
+        public async Task<IHttpActionResult> PutProposal(int pid, ProposalModel proposal)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != proposal.Id)
+            if (pid != proposal.Id)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace BottomsUp.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProposalExists(id))
+                if (!ProposalExists(pid))
                 {
                     return NotFound();
                 }
@@ -119,9 +119,9 @@ namespace BottomsUp.Web.Controllers
 
         // DELETE: api/v1/proposals/5
         [ResponseType(typeof(ProposalModel))]
-        public async Task<IHttpActionResult> DeleteProposal(int id)
+        public async Task<IHttpActionResult> DeleteProposal(int pid)
         {
-            Proposal proposal = await _repo.GetProposalAsync(id);
+            Proposal proposal = await _repo.GetProposalAsync(pid);
             if (proposal == null)
             {
                 return NotFound();
@@ -134,9 +134,9 @@ namespace BottomsUp.Web.Controllers
             return Ok(_modelFactory.Create(proposal));
         }
 
-        private bool ProposalExists(int id)
+        private bool ProposalExists(int pid)
         {
-            return _repo.GetAllProposals().Count(e => e.Id == id) > 0;
+            return _repo.GetAllProposals().Count(e => e.Id == pid) > 0;
         }
     }
 }

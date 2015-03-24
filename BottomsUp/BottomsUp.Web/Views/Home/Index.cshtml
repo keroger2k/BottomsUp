@@ -63,10 +63,10 @@
         var app = angular.module('app', ['ngResource']);
 
         app.factory('proposalFactory', function ($http, $resource) {
-            return $resource('api/v1/proposals/:id',
-                { id: '@@id' },
+            return $resource('api/v1/proposals/:pid',
+                { pid: '@@id' },
                 { 'update': { method: 'PUT' } },
-                { 'query': { method: 'GET', isArray: false } });
+                { 'query': { method: 'GET', isArray: true } });
         });
 
         app.factory('notificationFactory', function () {

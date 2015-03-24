@@ -10,7 +10,6 @@ namespace BottomsUp.Web.Controllers
 {
     public class HomeController : Controller
     {
-        DatabaseContext db = new DatabaseContext();
         // GET: Home
         public ActionResult Index()
         {

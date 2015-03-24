@@ -16,7 +16,7 @@ namespace BottomsUp.Web
             routes.MapRoute(
                 name: "DefaultProposals",
                 url: "proposals/{id}",
-                defaults: new { controller = "Proposals", action = "Details", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Details", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",
