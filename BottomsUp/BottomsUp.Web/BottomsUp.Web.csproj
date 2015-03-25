@@ -217,11 +217,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="HtmlPage1.html" />
     <Content Include="js\dataService.js" />
-    <Content Include="js\home-index.js" />
-    <Content Include="js\controllers\proposals\newProposalController.js" />
-    <Content Include="js\controllers\proposals\proposalsController.js" />
     <Content Include="js\router.js" />
-    <Content Include="js\controllers\proposals\singleProposalController.js" />
+    <Content Include="js\views\proposals\details.html" />
+    <Content Include="js\views\proposals\index.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
@@ -237,22 +235,12 @@
     <Content Include="Content\bottomsup.scss" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="templates\proposals\newProposalView.html" />
-    <Content Include="templates\proposals\proposalsView.html" />
-    <Content Include="templates\proposals\singleProposalView.html" />
-    <Content Include="Views\Proposals.bak\Index.cshtml" />
-    <Content Include="Views\Proposals.bak\Details.cshtml" />
-    <Content Include="Views\Proposals.bak\Edit.cshtml" />
-    <Content Include="Views\Proposals.bak\Create.cshtml" />
-    <Content Include="Views\Proposals.bak\Delete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Views\Proposals\Details.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -303,12 +291,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Proposals.bak\_Details.cshtml.bak" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="js\controllers\proposals\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

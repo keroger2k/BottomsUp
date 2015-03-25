@@ -1,0 +1,16 @@
+﻿<table class="table table-striped table-bordered table-condensed table-hover">
+    <tr>
+        <th>Name</th>
+        <th>Modified By</th>
+        <th>Created</th>
+        <th>Updated</th>
+    </tr>
+    <tr ng-repeat="p in proposals | orderBy:'id':true">
+        <td>
+            <a data-ng-href="#/proposals/{{p.id}}">{{p.name}}</a>
+        </td>
+        <td>{{p.modifiedBy}}</td>
+        <td>{{p.created | date:'medium' }}</td>
+        <td>{{p.updated | date:'medium'}}</td>
+    </tr>
+</table>
