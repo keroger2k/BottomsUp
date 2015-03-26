@@ -26,13 +26,13 @@ namespace BottomsUp.Core.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Proposal>().HasMany(c => c.Requirements).WithRequired(d => d.Proposal);
+            //modelBuilder.Entity<Proposal>().HasMany(c => c.Requirements).WithRequired(d => d.Proposal);
             
             //modelBuilder.Entity<Requirement>()
             //    .HasMany(c => c.Tasks).WithRequired().HasForeignKey(c => c.RequirementId);
 
-            //modelBuilder.Entity<Requirement>()
-            //    .HasRequired(c => c.Category).WithMany().HasForeignKey(c => c.CategoryId);
+            modelBuilder.Entity<Requirement>()
+                .HasRequired(c => c.Category).WithMany();
 
             //modelBuilder.Entity<Proposal>()
             //   .HasMany(c => c.Requirements).WithRequired().HasForeignKey(c => c.ProposalId);

@@ -17,22 +17,43 @@ module.config(function ($routeProvider) {
 
 });
 
-module.factory("dataService", function ($http, $resource) {
+module.factory("proposalService", function ($http, $resource) {
     return $resource('api/v1/proposals/:pid',
          { pid: '@id' },
          { 'update': { method: 'PUT' } },
          { 'query': { method: 'GET', isArray: false } });
 });
 
-module.controller('proposalController', ['$scope', 'dataService', function ($scope, dataService) {
-    $scope.proposals = [];
 
-    dataService.query(function (data) {
-        $scope.proposals = data;
-    });
+module.factory("requirementService", function ($http, $resource) {
+    return $resource('api/v1/proposals/:pid/requirements/:rid',
+         { pid: '@pid', rid: '@rid' },
+         { 'update': { method: 'PUT' } },
+         { 'query': { method: 'GET', isArray: false } });
+});
 
-}]);
+module.controller('proposalController',
+    ['$scope', 'proposalService',
+        function ($scope, proposalService) {
+            $scope.proposals = [];
 
-module.controller('proposalDetailController', ['$scope', '$routeParams', 'dataService', function ($scope, $routeParams, dataService) {
-    $scope.proposal = dataService.get({ pid: $routeParams.pid, includeRequirements: true });
-}]);
+            proposalService.query(function (data) {
+                $scope.proposals = data;
+            });
+
+        }]);
+
+module.controller('proposalDetailController',
+    ['$scope', '$routeParams', 'requirementService',
+    function ($scope, $routeParams, requirementService) {
+        $scope.requirements = [];
+
+        requirementService.query({ rid: $routeParams.rid, pid: $routeParams.pid, includeTasks: true }, function (data) {
+            $scope.requirements = data;
+        });
+
+        $scope.requirementSelected = function (requirement) {
+            console.log(requirement);
+        }
+
+    }]);

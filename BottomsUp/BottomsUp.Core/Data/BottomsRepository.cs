@@ -24,7 +24,9 @@ namespace BottomsUp.Core.Data
 
         public IQueryable<Proposal> GetAllProposalsWithRequirements()
         {
-            return _db.Propsals.Include(c => c.Requirements);
+            return _db.Propsals
+                .Include("Requirements")
+                .Include("Requirements.Category");
         }
 
         public IQueryable<Proposal> GetAllProposalsWithRequirementsAndTasks()
@@ -43,7 +45,12 @@ namespace BottomsUp.Core.Data
 
         public async Task<Proposal> GetProposalWithRequirementsAsync(int id)
         {
-            return await _db.Propsals.Include("Requirements").FirstOrDefaultAsync(c => c.Id == id);
+            return await _db.Propsals
+                .Include("Requirements")
+                .Include("Requirements.Category")
+                .Include("Requirements.Tasks")
+                .Include("Requirements.Tasks.Labor")
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public void AddProposal(Proposal proposal)

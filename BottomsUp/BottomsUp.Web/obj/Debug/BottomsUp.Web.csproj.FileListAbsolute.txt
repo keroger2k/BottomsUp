@@ -132,11 +132,6 @@ C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\System.Web.
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\System.Net.Http.Formatting.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\System.Web.Http.xml
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\System.Web.Http.WebHost.xml
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\AutoMapper.dll
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\AutoMapper.Net4.dll
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\AutoMapper.pdb
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\AutoMapper.xml
-C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\AutoMapper.Net4.pdb
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.dll
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.Common.dll
 C:\Users\Kyle\Documents\GitHub\BottomsUp\BottomsUp\BottomsUp.Web\bin\Ninject.Web.Mvc.dll
