@@ -216,8 +216,9 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="HtmlPage1.html" />
-    <Content Include="js\dataService.js" />
+    <Content Include="js\controllers\proposals\proposalControllers.js" />
     <Content Include="js\router.js" />
+    <Content Include="js\services\dataServices.js" />
     <Content Include="js\views\proposals\details.html" />
     <Content Include="js\views\proposals\index.html" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -296,7 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="js\controllers\proposals\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

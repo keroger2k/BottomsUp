@@ -11,7 +11,7 @@
         <th>Created</th>
         <th>Updated</th>
     </tr>
-    <tr ng-repeat="r in requirements | orderBy:'id':true" ng-click="requirementSelected(r)">
+    <tr ng-repeat="r in proposal.requirements | orderBy:'id':true" ng-click="requirementSelected(r)">
         <td>{{ r.pwsNumber }}</td>
         <td>{{ r.category.name }}</td>
         <td>{{ r.description }}</td>
@@ -20,5 +20,22 @@
         <td>{{ r.modifiedBy }}</td>
         <td>{{ r.created | date:'medium' }}</td>
         <td>{{ r.updated | date:'medium'}}</td>
+    </tr>
+</table>
+
+<table class="table table-striped table-bordered table-condensed table-hover" ng-show="selectedRequirement.tasks.length > 0">
+    <tr>
+        <th>Description</th>
+        <th>Comments</th>
+        <th>Modified By</th>
+        <th>Created</th>
+        <th>Updated</th>
+    </tr>
+    <tr ng-repeat="t in selectedRequirement.tasks | orderBy:'id':true">
+        <td>{{ t.description }}</td>
+        <td>{{ t.comments }}</td>
+        <td>{{ t.modifiedBy }}</td>
+        <td>{{ t.created | date:'medium' }}</td>
+        <td>{{ t.updated | date:'medium'}}</td>
     </tr>
 </table>

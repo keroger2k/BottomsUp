@@ -1,5 +1,4 @@
-﻿
-var module = angular.module('bottomsUp', ['ngRoute', 'ngResource']);
+﻿var module = angular.module('bottomsUp', ['ngRoute', 'ngResource']);
 
 module.config(function ($routeProvider) {
 
@@ -8,7 +7,7 @@ module.config(function ($routeProvider) {
         templateUrl: "/js/views/proposals/index.html"
     });
 
-    $routeProvider.when("/proposals/:pid", {
+    $routeProvider.when("/proposals/:pid/requirements", {
         controller: "proposalDetailController",
         templateUrl: "/js/views/proposals/details.html"
     });
@@ -17,43 +16,3 @@ module.config(function ($routeProvider) {
 
 });
 
-module.factory("proposalService", function ($http, $resource) {
-    return $resource('api/v1/proposals/:pid',
-         { pid: '@id' },
-         { 'update': { method: 'PUT' } },
-         { 'query': { method: 'GET', isArray: false } });
-});
-
-
-module.factory("requirementService", function ($http, $resource) {
-    return $resource('api/v1/proposals/:pid/requirements/:rid',
-         { pid: '@pid', rid: '@rid' },
-         { 'update': { method: 'PUT' } },
-         { 'query': { method: 'GET', isArray: false } });
-});
-
-module.controller('proposalController',
-    ['$scope', 'proposalService',
-        function ($scope, proposalService) {
-            $scope.proposals = [];
-
-            proposalService.query(function (data) {
-                $scope.proposals = data;
-            });
-
-        }]);
-
-module.controller('proposalDetailController',
-    ['$scope', '$routeParams', 'requirementService',
-    function ($scope, $routeParams, requirementService) {
-        $scope.requirements = [];
-
-        requirementService.query({ rid: $routeParams.rid, pid: $routeParams.pid, includeTasks: true }, function (data) {
-            $scope.requirements = data;
-        });
-
-        $scope.requirementSelected = function (requirement) {
-            console.log(requirement);
-        }
-
-    }]);
