@@ -3,14 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="padding-top:40px;" ng-view>
+<div ng-view>
     
 
    
 </div>
 
 @section scripts {
-<script src="~/js/router.js"></script>
 <script src="~/js/controllers/proposals/proposalControllers.js"></script>
+<script src="~/js/controllers/tasks/taskViewController.js"></script>
 <script src="~/js/services/dataServices.js"></script>
 }

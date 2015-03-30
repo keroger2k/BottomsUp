@@ -9,7 +9,6 @@ namespace BottomsUp.Core.Models
     public class Tasking
     {
         public int Id { get; set; }
-        public int RequirementId { get; set; }
         public string Description { get; set; }
         public decimal Percentage { get; set; }
         public decimal Volume { get; set; }
@@ -20,7 +19,6 @@ namespace BottomsUp.Core.Models
         public DateTime Created { get; set; }
         public string ModifiedBy { get; set; }
 
-        public virtual Requirement Requirement { get; set; }
         public virtual LaborCategory Labor { get; set; }
     }
 }

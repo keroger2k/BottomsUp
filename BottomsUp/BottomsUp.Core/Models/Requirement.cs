@@ -22,7 +22,6 @@ namespace BottomsUp.Core.Models
 
         public virtual Requirement References { get; set; }
         public virtual ICollection<Tasking> Tasks { get; set; }
-        //public virtual Proposal Proposal { get; set; }
         public virtual Category Category { get; set; }
 
         public decimal TotalHours

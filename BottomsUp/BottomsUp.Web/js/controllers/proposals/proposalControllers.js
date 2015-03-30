@@ -12,17 +12,18 @@ module.controller('proposalController',
         }]);
 
 module.controller('proposalDetailController',
-    ['$scope', '$routeParams', 'proposalService',
-    function ($scope, $routeParams, proposalService) {
-        $scope.selectedRequirement = [];
+    ['$scope', '$routeParams', 'proposalService', 'notificationFactory',
+function ($scope, $routeParams, proposalService, notificationFactory) {
+    $scope.selectedRequirement = [];
+    $scope.addMode = false;
 
-        $scope.proposal = proposalService.get({
-            pid: $routeParams.pid,
-            includeRequirements: true
-        })
+    $scope.requirementSelected = function (requirement) {
+        $scope.selectedRequirement = requirement;
+    }
 
-        $scope.requirementSelected = function (requirement) {
-            $scope.selectedRequirement = requirement;
-        }
+    $scope.proposal = proposalService.get({
+        pid: $routeParams.pid,
+        includeRequirements: true
+    })
 
-    }]);
+}]);
