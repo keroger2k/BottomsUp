@@ -4,14 +4,15 @@ module.controller('taskViewController',
     ['$scope', 'proposalService', 'taskService', '$routeParams', 'notificationFactory',
 function ($scope, proposalService, taskService, $routeParams, notificationFactory) {
 
-    $scope.tasks = $scope.selectedRequirement.tasks;
-
-    var successCallback = function (e, cb) {
+        var successCallback = function (e, cb) {
         notificationFactory.success();
-        $scope.proposal = proposalService.get({
-            pid: $routeParams.pid,
-            includeRequirements: true
-        })
+        
+        $.each($scope.selectedRequirement.tasks, function (index, item) {
+            if (e.id == $scope.selectedRequirement.tasks[index].id) {
+                $scope.selectedRequirement.tasks[index] = e;
+            }
+        });
+
     };
 
     var errorCallback = function (e) {
