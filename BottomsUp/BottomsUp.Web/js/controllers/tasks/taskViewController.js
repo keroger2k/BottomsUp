@@ -6,13 +6,17 @@ function ($scope, proposalService, taskService, $routeParams, notificationFactor
 
         var successCallback = function (e, cb) {
         notificationFactory.success();
-        
         $.each($scope.selectedRequirement.tasks, function (index, item) {
             if (e.id == $scope.selectedRequirement.tasks[index].id) {
-                $scope.selectedRequirement.tasks[index] = e;
+                taskService.get({
+                    pid: $routeParams.pid,
+                    rid: $scope.selectedRequirement.id,
+                    tid: e.id
+                }, function (data) {
+                    $scope.selectedRequirement.tasks[index] = data;
+                });
             }
         });
-
     };
 
     var errorCallback = function (e) {
@@ -36,6 +40,7 @@ function ($scope, proposalService, taskService, $routeParams, notificationFactor
     }
 
     $scope.updateTask = function (task) {
+        console.log(this.selectedTask);
         taskService.update({
             pid: $routeParams.pid,
             rid: $scope.selectedRequirement.id,

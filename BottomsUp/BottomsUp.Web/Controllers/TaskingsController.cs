@@ -22,6 +22,35 @@ namespace BottomsUp.Web.Controllers
 
         }
 
+        // GET: api/v1/proposals/{pid}/requirements/{rid}/tasks/{tid}
+        [ResponseType(typeof(TaskingModel))]
+        public IHttpActionResult GetTasks(int pid, int rid, int tid)
+        {
+            IQueryable<Proposal> props = _repo.GetAllProposalsWithRequirementsAndTasks();
+            var proposal = props.FirstOrDefault(c => c.Id == pid);
+
+            if (proposal == null)
+            {
+                return NotFound();
+            }
+
+            var req = proposal.Requirements.FirstOrDefault(c => c.Id == rid);
+
+            if (req == null)
+            {
+                return NotFound();
+            }
+
+            var task = req.Tasks.FirstOrDefault(c => c.Id == tid);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            var pModel = _modelFactory.Create(task);
+            return Ok(pModel);
+        }
+
         // GET: api/v1/proposals/{pid}/requirements/{rid}/tasks
         [ResponseType(typeof(IEnumerable<TaskingModel>))]
         public IHttpActionResult GetTasks(int pid, int rid)
@@ -44,6 +73,7 @@ namespace BottomsUp.Web.Controllers
             var pModel = _modelFactory.Create(req);
             return Ok(pModel.Tasks);
         }
+
 
         // PUT: api/Taskings/5
         [ResponseType(typeof(void))]
