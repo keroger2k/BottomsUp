@@ -16,7 +16,8 @@ namespace BottomsUp.Web
                         "~/Scripts/angular.js",
                         "~/Scripts/angular-route.js",
                         "~/Scripts/angular-resource.js",
-                        "~/Scripts/angular-resource.js"));
+                        "~/Scripts/angular-ui-router.js",
+                        "~/Scripts/ui-grid-unstable.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                         "~/Scripts/toastr.js"));

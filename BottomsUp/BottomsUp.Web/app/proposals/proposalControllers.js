@@ -15,38 +15,15 @@
 })();
 
 
-(function () {
-    'use strict';
-
-    var module = angular.module('bottomsUp');
-
-    module.factory('dataService', dataService);
-
-
-    function dataService() {
-
-        this.requirementTasks = [];
-
-        function getRequirementTasks() {
-            return this.requirementTasks;
-        }
-
-        return {
-            requirementTasks: getRequirementTasks
-        }
-    }
-
-})();
-
 
 (function () {
     'use strict';
 
     angular.module('bottomsUp').controller('proposalDetailController', proposalDetailController);
 
-    proposalDetailController.$inject = ['initialData', 'notificationFactory', 'taskService', '$routeParams', 'dataService'];
+    proposalDetailController.$inject = ['initialData', 'notificationFactory', 'taskService', '$stateParams', 'dataService'];
 
-    function proposalDetailController(initialData, notificationFactory, taskService, $routeParams, dataService) {
+    function proposalDetailController(initialData, notificationFactory, taskService, $stateParams, dataService) {
 
         var vm = this;
 
@@ -65,7 +42,7 @@
         var successCallback = function (e, cb) {
             notificationFactory.success();
             taskService.query({
-                pid: $routeParams.pid,
+                pid: $stateParams.pid,
                 rid: vm.selectedRequiremnetId,
             },
             function (data) {
@@ -99,10 +76,9 @@
         }
 
         function updateTask(task) {
-            console.log(this.selectedTask);
             taskService.update({
-                pid: $routeParams.pid,
-                rid: vselectedRequiremnetId,
+                pid: $stateParams.pid,
+                rid: vm.selectedRequiremnetId,
                 tid: task.id
             }, task, successCallback, errorCallback);
         }

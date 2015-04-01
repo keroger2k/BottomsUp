@@ -30,7 +30,7 @@
     <div class="wrapper">
 
         <header class="main-header">
-            <a href="#/" class="logo"><b>Bottoms</b>UP</a>
+            <a ui-sref="home" class="logo"><b>Bottoms</b>UP</a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -259,8 +259,8 @@
 
     <!-- AngularJs -->
     @Scripts.Render("~/bundles/angular")
-    <script src="~/js/router.js"></script>
-    <script src="~/js/controllers/shared/navigationMenuController.js"></script>
+    <script src="~/app/router.js"></script>
+    <script src="~/app/layout/navigationMenuController.js"></script>
     @Scripts.Render("~/bundles/toastr")
 
     @RenderSection("scripts", required: false)
