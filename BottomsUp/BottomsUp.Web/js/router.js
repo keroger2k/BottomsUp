@@ -3,13 +3,25 @@
 module.config(function ($routeProvider) {
 
     $routeProvider.when("/", {
+        templateUrl: "/js/views/proposals/index.html",
         controller: "proposalController",
-        templateUrl: "/js/views/proposals/index.html"
+        controllerAs: 'vm',
+        resolve: {
+            initialData: ['proposalService', function (proposalService) {
+                return proposalService.query();
+            }]
+        }
     });
 
     $routeProvider.when("/proposals/:pid/requirements", {
+        templateUrl: "/js/views/proposals/details.html",
         controller: "proposalDetailController",
-        templateUrl: "/js/views/proposals/details.html"
+        controllerAs: 'vm',
+        resolve: {
+            initialData: ['proposalService', '$route', function (proposalService, $route) {
+                return proposalService.get({ pid: $route.current.params.pid, includeRequirements: true });
+            }]
+        }
     });
 
     $routeProvider.otherwise({ redirectTo: "/" });

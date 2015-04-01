@@ -23,7 +23,7 @@
                         <th style="width:200px;">Created</th>
                         <th style ="width:200px;">Updated</th>
                     </tr>
-                    <tr ng-repeat="p in proposals | orderBy:'id':true">
+                    <tr ng-repeat="p in vm.proposals">
                         <td>
                             <a data-ng-href="#/proposals/{{p.id}}/requirements">{{p.name}}</a>
                         </td>
